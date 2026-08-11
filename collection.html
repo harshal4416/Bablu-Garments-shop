@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आमचा संग्रह | बबलू गारमेंट्स</title>
+    <meta name="description" content="बबलू गारमेंट्समधील संपूर्ण कपड्यांचा संग्रह पाहा.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-logo">बबलू गारमेंट्स</span>
+            <span class="nav-tagline">कपड्यांचे विश्वसनीय ठिकाण</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="new-stock.html">नवीन स्टॉक</a></li>
+            <li><a href="collection.html">आमचा संग्रह</a></li>
+            <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
+            <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
+            <li><a href="about.html">आमच्याबद्दल</a></li>
+            <li><a href="contact.html">संपर्क</a></li>
+        </ul>
+        
+        <div class="nav-icons">
+            <a href="new-stock.html" class="icon-btn" title="Notifications">
+                🔔
+                <span class="notification-badge">1</span>
+            </a>
+            <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे." target="_blank" class="icon-btn" title="WhatsApp">
+                💬
+            </a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="section-padding" style="background-color: var(--color-white); padding-bottom: 2rem;">
+        <div class="container">
+            <h1 class="section-title">आमचा संग्रह</h1>
+            <h2 class="section-subtitle">OUR COLLECTION</h2>
+            <p class="section-desc">आमच्या गॅलरीमध्ये विविध प्रकारच्या कपड्यांची झलक पहा. प्रत्येक प्रसंगासाठी खास डिझाईन्स.</p>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">सर्व</button>
+                <button class="filter-btn" data-filter="boys">मुलांचे कपडे</button>
+                <button class="filter-btn" data-filter="girls">मुलींचे कपडे</button>
+                <button class="filter-btn" data-filter="baby">बेबी वेअर</button>
+                <button class="filter-btn" data-filter="party">पार्टी वेअर</button>
+                <button class="filter-btn" data-filter="casual">कॅज्युअल वेअर</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masonry Gallery Section -->
+    <section class="section-padding bg-light" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="masonry-grid" id="gallery-grid">
+                
+                <div class="masonry-item filter-item" data-category="boys">
+                    <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=600&auto=format&fit=crop" alt="Boys Collection 1">
+                    <div class="masonry-overlay"><span>मुलांचे कपडे</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="girls">
+                    <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=600&auto=format&fit=crop" alt="Girls Collection 1">
+                    <div class="masonry-overlay"><span>मुलींचे फ्रॉक</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="baby">
+                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop" alt="Baby Collection 1">
+                    <div class="masonry-overlay"><span>बेबी रोम्पर्स</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="party">
+                    <img src="https://images.unsplash.com/photo-1604144365773-f935398d5a44?q=80&w=600&auto=format&fit=crop" alt="Party Wear 1">
+                    <div class="masonry-overlay"><span>पार्टी वेअर सूट</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="casual">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=600&auto=format&fit=crop" alt="Casual Boys Wear">
+                    <div class="masonry-overlay"><span>कॅज्युअल जीन्स शर्ट</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="girls">
+                    <img src="https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?q=80&w=600&auto=format&fit=crop" alt="Girls Western">
+                    <div class="masonry-overlay"><span>मुलींचे वेस्टर्न गाऊन</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="party">
+                    <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=600&auto=format&fit=crop" alt="Party Wear 2">
+                    <div class="masonry-overlay"><span>पार्टी वेअर ड्रेस</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="casual">
+                    <img src="https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=600&auto=format&fit=crop" alt="Casual Girls Wear">
+                    <div class="masonry-overlay"><span>कॅज्युअल टॉप्स</span></div>
+                </div>
+                
+                <div class="masonry-item filter-item" data-category="baby">
+                    <img src="https://images.unsplash.com/photo-1605366474164-9b2ee3a65dc2?q=80&w=600&auto=format&fit=crop" alt="Baby Collection 2">
+                    <div class="masonry-overlay"><span>क्यूट बेबी वेअर</span></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-prev">‹</button>
+        <button class="lightbox-next">›</button>
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img src="" alt="Gallery Image" class="lightbox-img" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo">बबलू गारमेंट्स</div>
+                <div class="nav-tagline" style="margin-bottom: 1.5rem;">कपड्यांचे विश्वसनीय ठिकाण</div>
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    लहानग्यांसाठी आकर्षक, आरामदायी आणि ट्रेंडी कपड्यांचे खास कलेक्शन.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <strong style="color: var(--color-gold);">मालक:</strong> शुभम चौधरी<br>
+                    <strong style="color: var(--color-gold);">फोन:</strong> 9022103118<br>
+                    <strong style="color: var(--color-gold);">पत्ता:</strong> दुकान नंबर. 83, ग्राउंड फ्लोर, सेंट्रल फुले मार्केट, जळगाव
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="new-stock.html">नवीन स्टॉक</a></li>
+                    <li><a href="collection.html">आमचा संग्रह</a></li>
+                    <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
+                    <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="about.html">आमच्याबद्दल</a></li>
+                    <li><a href="contact.html">संपर्क</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे." target="_blank" class="social-icon">WA</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 बबलू गारमेंट्स. सर्व हक्क राखीव.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>

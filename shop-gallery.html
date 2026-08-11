@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आमच्या दुकानाची झलक | बबलू गारमेंट्स</title>
+    <meta name="description" content="बबलू गारमेंट्सच्या दुकानाची आणि कलेक्शनची एक छोटीशी झलक.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-logo">बबलू गारमेंट्स</span>
+            <span class="nav-tagline">कपड्यांचे विश्वसनीय ठिकाण</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="new-stock.html">नवीन स्टॉक</a></li>
+            <li><a href="collection.html">आमचा संग्रह</a></li>
+            <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
+            <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
+            <li><a href="about.html">आमच्याबद्दल</a></li>
+            <li><a href="contact.html">संपर्क</a></li>
+        </ul>
+        
+        <div class="nav-icons">
+            <a href="new-stock.html" class="icon-btn" title="Notifications">
+                🔔
+                <span class="notification-badge">1</span>
+            </a>
+            <a href="contact.html" class="icon-btn" title="WhatsApp">
+                💬
+            </a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="section-padding" style="background-color: var(--color-white); padding-bottom: 2rem;">
+        <div class="container">
+            <h1 class="section-title">आमच्या दुकानाची झलक</h1>
+            <h2 class="section-subtitle">OUR STORE</h2>
+            <p class="section-desc">बबलू गारमेंट्सच्या दुकानाची आणि कलेक्शनची एक छोटीशी झलक.</p>
+        </div>
+    </section>
+
+    <!-- Masonry Shop Gallery Section (Dynamically Rendered via JS) -->
+    <section class="section-padding bg-light" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="masonry-grid" id="shop-gallery-grid">
+                <!-- Javascript will render shop images here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-prev">‹</button>
+        <button class="lightbox-next">›</button>
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img src="" alt="Gallery Image" class="lightbox-img" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo">बबलू गारमेंट्स</div>
+                <div class="nav-tagline" style="margin-bottom: 1.5rem;">कपड्यांचे विश्वसनीय ठिकाण</div>
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    लहानग्यांसाठी आकर्षक, आरामदायी आणि ट्रेंडी कपड्यांचे खास कलेक्शन.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <strong style="color: var(--color-gold);">मालक:</strong> शुभम चौधरी<br>
+                    <strong style="color: var(--color-gold);">फोन:</strong> 9022103118<br>
+                    <strong style="color: var(--color-gold);">पत्ता:</strong> दुकान नंबर. 83, ग्राउंड फ्लोर, सेंट्रल फुले मार्केट, जळगाव
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="new-stock.html">नवीन स्टॉक</a></li>
+                    <li><a href="collection.html">आमचा संग्रह</a></li>
+                    <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
+                    <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="about.html">आमच्याबद्दल</a></li>
+                    <li><a href="contact.html">संपर्क</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे." target="_blank" class="social-icon">WA</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 बबलू गारमेंट्स. सर्व हक्क राखीव.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>
