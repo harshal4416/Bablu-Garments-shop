@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Bablu Garments</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .admin-page {
+            min-height: 100vh;
+            background: #f7f3ee;
+            padding: 40px 20px;
+        }
+
+        .admin-wrapper {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .admin-header {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .admin-header h1 {
+            margin: 0 0 5px;
+        }
+
+        .admin-header p {
+            margin: 0;
+            color: #666;
+        }
+
+        .admin-btn {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .logout-btn {
+            background: #7f1d1d;
+            color: white;
+        }
+
+        .stock-form-card,
+        .stock-list-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .stock-form-card h2,
+        .stock-list-card h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .image-preview {
+            margin-top: 12px;
+            display: none;
+        }
+
+        .image-preview img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .publish-btn {
+            background: #8b1e1e;
+            color: white;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .publish-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #stockMessage {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .stock-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .stock-item {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .stock-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .stock-item-info {
+            padding: 15px;
+        }
+
+        .stock-item-info h3 {
+            margin: 0 0 7px;
+        }
+
+        .stock-category {
+            font-size: 13px;
+            color: #8b1e1e;
+            font-weight: 600;
+        }
+
+        .stock-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .delete-btn {
+            background: #b91c1c;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .empty-message {
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #loginSection {
+            max-width: 500px;
+            margin: 80px auto;
+        }
+
+        .login-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #8b1e1e;
+            color: white;
+        }
+
+        #loginMessage {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        #dashboard {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logout-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <section id="loginSection" class="admin-page">
+
+        <div class="login-card">
+
+            <h1>Admin Login</h1>
+
+            <p>Bablu Garments Admin Panel</p>
+
+            <form id="loginForm">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Admin Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit" class="admin-btn login-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div id="loginMessage"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="admin-page">
+
+        <div class="admin-wrapper">
+
+            <!-- HEADER -->
+            <div class="admin-header">
+
+                <div>
+                    <h1>Bablu Garments Admin</h1>
+                    <p>Manage your new stock</p>
+                </div>
+
+                <button
+                    id="logoutBtn"
+                    class="admin-btn logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+
+            <!-- ADD STOCK -->
+            <div class="stock-form-card">
+
+                <h2>📦 Add New Stock</h2>
+
+                <form id="stockForm">
+
+                    <div class="form-group">
+
+                        <label for="stockName">
+                            Stock Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="stockName"
+                            placeholder="उदा. समर कलेक्शन टी-शर्ट्स"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="stockCategory">
+                            Category
+                        </label>
+
+                        <select id="stockCategory" required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="boys">
+                                मुलांचे कपडे
+                            </option>
+
+                            <option value="girls">
+                                मुलींचे कपडे
+                            </option>
+
+                            <option value="baby">
+                                बेबी वेअर
+                            </option>
+
+                            <option value="party">
+                                पार्टी वेअर
+                            </option>
+
+                            <option value="casual">
+                                कॅज्युअल वेअर
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="stockDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="stockDescription"
+                            placeholder="स्टॉकबद्दल थोडक्यात माहिती..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="stockImage">
+                            Stock Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="stockImage"
+                            accept="image/*"
+                            required
+                        >
+
+                        <div
+                            class="image-preview"
+                            id="imagePreview"
+                        >
+                            <img
+                                id="previewImage"
+                                src=""
+                                alt="Preview"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="admin-btn publish-btn"
+                        id="publishBtn"
+                    >
+                        Publish Stock
+                    </button>
+
+                </form>
+
+                <div id="stockMessage"></div>
+
+            </div>
+
+
+            <!-- STOCK LIST -->
+            <div class="stock-list-card">
+
+                <h2>📋 Current Stock</h2>
+
+                <div
+                    class="stock-list"
+                    id="stockList"
+                >
+                    <div class="empty-message">
+                        Loading stock...
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script type="module" src="js/admin.js"></script>
+
+</body>
+</html>
