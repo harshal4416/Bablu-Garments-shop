@@ -1,718 +1,780 @@
 <!DOCTYPE html>
-
 <html lang="mr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>ग्राहकांचे अभिप्राय | बबलू गारमेंट्स</title>
+    <title>ग्राहकांचे अभिप्राय | बबलू गारमेंट्स</title>
 
-<meta name="description"
-    content="आमच्या ग्राहकांनी बबलू गारमेंट्सबद्दल दिलेले अभिप्राय आणि प्रतिक्रिया वाचा.">
+    <meta name="description"
+        content="आमच्या ग्राहकांनी बबलू गारमेंट्सबद्दल दिलेले अभिप्राय आणि प्रतिक्रिया वाचा.">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap"
-    rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap"
+        rel="stylesheet">
 
-<!-- Stylesheet -->
-<link rel="stylesheet" href="css/style.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
 
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-```
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
 <body>
 
-```
-<!-- Navbar -->
-<nav class="navbar">
+    <!-- Navbar -->
+    <nav class="navbar">
 
-    <a href="index.html" class="nav-brand">
-        <span class="nav-logo">बबलू गारमेंट्स</span>
-        <span class="nav-tagline">कपड्यांचे विश्वसनीय ठिकाण</span>
-    </a>
-
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="new-stock.html">नवीन स्टॉक</a></li>
-        <li><a href="collection.html">आमचा संग्रह</a></li>
-        <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
-        <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
-        <li><a href="about.html">आमच्याबद्दल</a></li>
-        <li><a href="contact.html">संपर्क</a></li>
-    </ul>
-
-    <div class="nav-icons">
-
-        <a href="new-stock.html" class="icon-btn" title="Notifications">
-            🔔
-            <span class="notification-badge">1</span>
+        <a href="index.html" class="nav-brand">
+            <span class="nav-logo">बबलू गारमेंट्स</span>
+            <span class="nav-tagline">कपड्यांचे विश्वसनीय ठिकाण</span>
         </a>
 
-        <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे"
-            target="_blank"
-            class="icon-btn"
-            title="WhatsApp">
-            💬
-        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="new-stock.html">नवीन स्टॉक</a></li>
+            <li><a href="collection.html">आमचा संग्रह</a></li>
+            <li><a href="shop-gallery.html">आमच्या दुकानाची झलक</a></li>
+            <li><a href="reviews.html">ग्राहकांचे अभिप्राय</a></li>
+            <li><a href="about.html">आमच्याबद्दल</a></li>
+            <li><a href="contact.html">संपर्क</a></li>
+        </ul>
 
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="nav-icons">
+
+            <a href="new-stock.html" class="icon-btn" title="Notifications">
+                🔔
+                <span class="notification-badge">1</span>
+            </a>
+
+            <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे"
+                target="_blank"
+                class="icon-btn"
+                title="WhatsApp">
+                💬
+            </a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
         </div>
-
-    </div>
-</nav>
+    </nav>
 
 
-<!-- Page Header -->
-<section class="section-padding"
-    style="background-color: var(--color-white); padding-bottom: 2rem;">
+    <!-- Page Header -->
+    <section class="section-padding"
+        style="background-color: var(--color-white); padding-bottom: 2rem;">
 
-    <div class="container">
+        <div class="container">
 
-        <h1 class="section-title">
-            ग्राहकांचे अभिप्राय
-        </h1>
+            <h1 class="section-title">
+                ग्राहकांचे अभिप्राय
+            </h1>
 
-        <h2 class="section-subtitle">
-            CUSTOMER REVIEWS
-        </h2>
+            <h2 class="section-subtitle">
+                CUSTOMER REVIEWS
+            </h2>
 
-        <p class="section-desc">
-            आमच्या ग्राहकांच्या प्रतिक्रिया आमच्यासाठी मोलाच्या आहेत.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- Reviews Display Section -->
-<section class="section-padding bg-light"
-    style="padding-top: 2rem; padding-bottom: 3rem;">
-
-    <div class="container">
-
-        <div class="reviews-grid" id="reviews-container">
-
-            <p>
-                अभिप्राय लोड होत आहेत...
+            <p class="section-desc">
+                आमच्या ग्राहकांच्या प्रतिक्रिया आमच्यासाठी मोलाच्या आहेत.
             </p>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- Submit Review Section -->
-<section class="section-padding"
-    style="background-color: var(--color-white);">
+    <!-- Reviews Display Section -->
+    <section class="section-padding bg-light"
+        style="padding-top: 2rem; padding-bottom: 3rem;">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="review-form-container">
+            <div class="reviews-grid" id="reviews-container">
 
-            <h3>तुमचा अभिप्राय नोंदवा</h3>
+                <p>
+                    अभिप्राय लोड होत आहेत...
+                </p>
 
-            <form id="review-form">
+            </div>
 
-                <!-- Name -->
-                <div class="form-group">
+        </div>
 
-                    <label for="review-name">
-                        तुमचे नाव
-                    </label>
-
-                    <input
-                        type="text"
-                        id="review-name"
-                        placeholder="उदा. अमोल पाटील"
-                        required>
-
-                </div>
+    </section>
 
 
-                <!-- Email -->
-                <div class="form-group">
+    <!-- Submit Review Section -->
+    <section class="section-padding"
+        style="background-color: var(--color-white);">
 
-                    <label for="review-email">
-                        तुमचा ई-मेल
-                    </label>
+        <div class="container">
 
-                    <input
-                        type="email"
-                        id="review-email"
-                        placeholder="example@gmail.com"
-                        required>
+            <div class="review-form-container">
 
-                </div>
+                <h3>तुमचा अभिप्राय नोंदवा</h3>
 
+                <form id="review-form">
 
-                <!-- Feedback -->
-                <div class="form-group">
+                    <!-- Name -->
+                    <div class="form-group">
 
-                    <label for="review-text">
-                        तुमचा अभिप्राय लिहा...
-                    </label>
-
-                    <textarea
-                        id="review-text"
-                        placeholder="येथे तुमची प्रतिक्रिया लिहा..."
-                        required></textarea>
-
-                </div>
-
-
-                <!-- Stock Notification Checkbox -->
-                <div class="form-group"
-                    style="margin-top: 1rem;">
-
-                    <label
-                        style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <label for="review-name">
+                            तुमचे नाव
+                        </label>
 
                         <input
-                            type="checkbox"
-                            id="stock-notification"
-                            style="width: 18px; height: 18px;">
+                            type="text"
+                            id="review-name"
+                            placeholder="उदा. अमोल पाटील"
+                            required>
 
-                        <span>
-                            नवीन स्टॉकची माहिती ई-मेलवर मिळवा
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <!-- Submit Button -->
-                <button
-                    type="submit"
-                    id="review-submit-btn"
-                    class="btn-primary"
-                    style="width: 100%; margin-top: 1rem;">
-
-                    अभिप्राय पाठवा
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- Footer -->
-<footer class="footer">
-
-    <div class="footer-grid">
-
-        <!-- Footer Brand -->
-        <div class="footer-brand">
-
-            <div class="nav-logo">
-                बबलू गारमेंट्स
-            </div>
-
-            <div class="nav-tagline"
-                style="margin-bottom: 1.5rem;">
-                कपड्यांचे विश्वसनीय ठिकाण
-            </div>
-
-            <p style="opacity: 0.8; line-height: 1.6;">
-                लहानग्यांसाठी आकर्षक, आरामदायी आणि ट्रेंडी
-                कपड्यांचे खास कलेक्शन.
-            </p>
-
-            <div style="margin-top: 1rem;">
-
-                <strong style="color: var(--color-gold);">
-                    मालक:
-                </strong>
-                शुभम चौधरी
-                <br>
-
-                <strong style="color: var(--color-gold);">
-                    फोन:
-                </strong>
-                9022103118
-                <br>
-
-                <strong style="color: var(--color-gold);">
-                    पत्ता:
-                </strong>
-                दुकान नंबर. 83, ग्राउंड फ्लोर,
-                सेंट्रल फुले मार्केट, जळगाव
-
-            </div>
-
-        </div>
-
-
-        <!-- Quick Links -->
-        <div class="footer-links">
-
-            <h4>Quick Links</h4>
-
-            <ul>
-
-                <li>
-                    <a href="index.html">
-                        Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="new-stock.html">
-                        नवीन स्टॉक
-                    </a>
-                </li>
-
-                <li>
-                    <a href="collection.html">
-                        आमचा संग्रह
-                    </a>
-                </li>
-
-                <li>
-                    <a href="shop-gallery.html">
-                        आमच्या दुकानाची झलक
-                    </a>
-                </li>
-
-                <li>
-                    <a href="reviews.html">
-                        ग्राहकांचे अभिप्राय
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- Information -->
-        <div class="footer-links">
-
-            <h4>Information</h4>
-
-            <ul>
-
-                <li>
-                    <a href="about.html">
-                        आमच्याबद्दल
-                    </a>
-                </li>
-
-                <li>
-                    <a href="contact.html">
-                        संपर्क
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- Social -->
-        <div class="footer-social">
-
-            <h4>Follow Us</h4>
-
-            <div class="social-icons">
-
-                <a href="#" class="social-icon">
-                    IG
-                </a>
-
-                <a href="#" class="social-icon">
-                    FB
-                </a>
-
-                <a
-                    href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे"
-                    target="_blank"
-                    class="social-icon">
-
-                    WA
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-
-        &copy; 2026 बबलू गारमेंट्स.
-        सर्व हक्क राखीव.
-
-    </div>
-
-</footer>
-
-
-<!-- Existing JavaScript -->
-<script src="js/script.js"></script>
-
-
-<!-- Supabase Reviews -->
-<script>
-
-    const SUPABASE_URL =
-        "https://hevkxlppmhfqyeqpywkj.supabase.co";
-
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_bEblWNgn7vXCMgjJ2nJLCA_vdXVaeKt";
-
-
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-        );
-
-
-    const reviewForm =
-        document.getElementById("review-form");
-
-    const reviewsContainer =
-        document.getElementById("reviews-container");
-
-    const submitButton =
-        document.getElementById("review-submit-btn");
-
-
-    // Escape HTML for security
-    function escapeHTML(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    // Load reviews from Supabase
-    async function loadReviews() {
-
-        reviewsContainer.innerHTML = `
-            <p>
-                अभिप्राय लोड होत आहेत...
-            </p>
-        `;
-
-
-        const { data, error } =
-            await supabaseClient
-                .from("reviews")
-                .select(
-                    "id, created_at, name, email, feedback, notify_stock"
-                )
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Supabase Load Error:",
-                error
-            );
-
-
-            reviewsContainer.innerHTML = `
-                <p>
-                    अभिप्राय लोड करण्यात अडचण आली.
-                </p>
-            `;
-
-            return;
-        }
-
-
-        if (!data || data.length === 0) {
-
-            reviewsContainer.innerHTML = `
-                <p>
-                    अजून कोणतेही अभिप्राय उपलब्ध नाहीत.
-                    तुमचा पहिला अभिप्राय नोंदवा! ❤️
-                </p>
-            `;
-
-            return;
-        }
-
-
-        reviewsContainer.innerHTML = "";
-
-
-        data.forEach(review => {
-
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "review-card";
-
-
-            const name =
-                escapeHTML(
-                    review.name || "ग्राहक"
-                );
-
-
-            const feedback =
-                escapeHTML(
-                    review.feedback || ""
-                );
-
-
-            let dateText = "";
-
-
-            if (review.created_at) {
-
-                const date =
-                    new Date(
-                        review.created_at
-                    );
-
-
-                dateText =
-                    date.toLocaleDateString(
-                        "mr-IN",
-                        {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric"
-                        }
-                    );
-
-            }
-
-
-            card.innerHTML = `
-
-                <div style="
-                    padding:24px;
-                    background:white;
-                    border-radius:12px;
-                    box-shadow:0 4px 15px rgba(0,0,0,0.08);
-                    height:100%;
-                ">
-
-                    <h3 style="
-                        margin-bottom:10px;
-                    ">
-                        ${name}
-                    </h3>
-
-
-                    <div style="
-                        font-size:20px;
-                        margin-bottom:12px;
-                    ">
-                        ⭐⭐⭐⭐⭐
                     </div>
 
 
-                    <p style="
-                        line-height:1.7;
-                        margin-bottom:10px;
-                    ">
-                        ${feedback}
-                    </p>
+                    <!-- Email -->
+                    <div class="form-group">
+
+                        <label for="review-email">
+                            तुमचा ई-मेल
+                        </label>
+
+                        <input
+                            type="email"
+                            id="review-email"
+                            placeholder="example@gmail.com"
+                            required>
+
+                    </div>
 
 
-                    <small style="
-                        opacity:0.6;
-                    ">
-                        ${dateText}
-                    </small>
+                    <!-- Feedback -->
+                    <div class="form-group">
+
+                        <label for="review-text">
+                            तुमचा अभिप्राय लिहा...
+                        </label>
+
+                        <textarea
+                            id="review-text"
+                            placeholder="येथे तुमची प्रतिक्रिया लिहा..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- Stock Notification Checkbox -->
+                    <div class="form-group"
+                        style="margin-top: 1rem;">
+
+                        <label
+                            style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+
+                            <input
+                                type="checkbox"
+                                id="stock-notification"
+                                style="width: 18px; height: 18px;">
+
+                            <span>
+                                नवीन स्टॉकची माहिती ई-मेलवर मिळवा
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        id="review-submit-btn"
+                        class="btn-primary"
+                        style="width: 100%; margin-top: 1rem;">
+
+                        अभिप्राय पाठवा
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <!-- Footer Brand -->
+            <div class="footer-brand">
+
+                <div class="nav-logo">
+                    बबलू गारमेंट्स
+                </div>
+
+                <div class="nav-tagline"
+                    style="margin-bottom: 1.5rem;">
+                    कपड्यांचे विश्वसनीय ठिकाण
+                </div>
+
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    लहानग्यांसाठी आकर्षक, आरामदायी आणि ट्रेंडी
+                    कपड्यांचे खास कलेक्शन.
+                </p>
+
+                <div style="margin-top: 1rem;">
+
+                    <strong style="color: var(--color-gold);">
+                        मालक:
+                    </strong>
+                    शुभम चौधरी
+                    <br>
+
+                    <strong style="color: var(--color-gold);">
+                        फोन:
+                    </strong>
+                    9022103118
+                    <br>
+
+                    <strong style="color: var(--color-gold);">
+                        पत्ता:
+                    </strong>
+                    दुकान नंबर. 83, ग्राउंड फ्लोर,
+                    सेंट्रल फुले मार्केट, जळगाव
 
                 </div>
 
-            `;
+            </div>
 
 
-            reviewsContainer.appendChild(card);
+            <!-- Quick Links -->
+            <div class="footer-links">
 
-        });
+                <h4>Quick Links</h4>
 
-    }
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="new-stock.html">
+                            नवीन स्टॉक
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="collection.html">
+                            आमचा संग्रह
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="shop-gallery.html">
+                            आमच्या दुकानाची झलक
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="reviews.html">
+                            ग्राहकांचे अभिप्राय
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
 
 
-    // Submit review
-    reviewForm.addEventListener(
-        "submit",
-        async function (event) {
+            <!-- Information -->
+            <div class="footer-links">
 
-            event.preventDefault();
+                <h4>Information</h4>
 
+                <ul>
 
-            const name =
-                document
-                    .getElementById("review-name")
-                    .value
-                    .trim();
+                    <li>
+                        <a href="about.html">
+                            आमच्याबद्दल
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="contact.html">
+                            संपर्क
+                        </a>
+                    </li>
 
-            const email =
-                document
-                    .getElementById("review-email")
-                    .value
-                    .trim();
+                </ul>
 
-
-            const feedback =
-                document
-                    .getElementById("review-text")
-                    .value
-                    .trim();
+            </div>
 
 
-            const notifyStock =
-                document
-                    .getElementById("stock-notification")
-                    .checked;
+            <!-- Social -->
+            <div class="footer-social">
+
+                <h4>Follow Us</h4>
+
+                <div class="social-icons">
+
+                    <a href="#" class="social-icon">
+                        IG
+                    </a>
+
+                    <a href="#" class="social-icon">
+                        FB
+                    </a>
+
+                    <a
+                        href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे"
+                        target="_blank"
+                        class="social-icon">
+
+                        WA
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+
+            &copy; 2026 बबलू गारमेंट्स.
+            सर्व हक्क राखीव.
+
+        </div>
+
+    </footer>
+
+
+    <!-- Existing JavaScript -->
+    <script src="js/script.js"></script>
+
+
+    <!-- Supabase Reviews -->
+    <script>
+
+        /*
+         * IMPORTANT:
+         * हा पूर्ण Reviews code IIFE मध्ये आहे.
+         * त्यामुळे script.js मधील SUPABASE_URL,
+         * SUPABASE_PUBLISHABLE_KEY किंवा इतर variables
+         * सोबत कोणताही conflict होणार नाही.
+         */
+
+        (async function () {
+
+            const reviewsSupabaseUrl =
+                "https://hevkxlppmhfqyeqpywkj.supabase.co";
+
+            const reviewsSupabaseKey =
+                "sb_publishable_bEblWNgn7vXCMgjJ2nJLCA_vdXVaeKt";
+
+
+            /* Create separate local Supabase client */
+            const reviewsSupabase =
+                window.supabase.createClient(
+                    reviewsSupabaseUrl,
+                    reviewsSupabaseKey
+                );
+
+
+            const reviewForm =
+                document.getElementById("review-form");
+
+            const reviewsContainer =
+                document.getElementById("reviews-container");
+
+            const submitButton =
+                document.getElementById("review-submit-btn");
+
+
+            /* Check elements */
             if (
-                !name ||
-                !email ||
-                !feedback
+                !reviewForm ||
+                !reviewsContainer ||
+                !submitButton
             ) {
 
-                alert(
-                    "कृपया सर्व माहिती भरा."
+                console.error(
+                    "Reviews page elements not found."
                 );
 
                 return;
             }
 
 
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            /* Escape HTML */
+            function reviewsEscapeHTML(value) {
 
+                return String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
 
-            if (!emailPattern.test(email)) {
-
-                alert(
-                    "कृपया योग्य ई-मेल टाका."
-                );
-
-                return;
             }
 
 
-            submitButton.disabled = true;
+            /* Load Reviews */
+            async function reviewsLoad() {
 
-            submitButton.innerText =
-                "पाठवत आहे...";
-
-
-            try {
-
-                const { error } =
-                    await supabaseClient
-                        .from("reviews")
-                        .insert([
-                            {
-                                name: name,
-                                email: email,
-                                feedback: feedback,
-                                notify_stock: notifyStock
-                            }
-                        ]);
+                reviewsContainer.innerHTML = `
+                    <p>
+                        अभिप्राय लोड होत आहेत...
+                    </p>
+                `;
 
 
-                if (error) {
+                try {
+
+                    const result =
+                        await reviewsSupabase
+                            .from("reviews")
+                            .select(
+                                "id, created_at, name, email, feedback, notify_stock, approved"
+                            )
+                            .eq("approved", true)
+                            .order(
+                                "created_at",
+                                {
+                                    ascending: false
+                                }
+                            );
+
+
+                    const data = result.data;
+                    const error = result.error;
+
+
+                    if (error) {
+
+                        console.error(
+                            "Supabase Load Error:",
+                            error
+                        );
+
+
+                        reviewsContainer.innerHTML = `
+                            <p>
+                                अभिप्राय लोड करण्यात अडचण आली.
+                            </p>
+                        `;
+
+                        return;
+                    }
+
+
+                    if (!data || data.length === 0) {
+
+                        reviewsContainer.innerHTML = `
+                            <p>
+                                अजून कोणतेही अभिप्राय उपलब्ध नाहीत.
+                                तुमचा पहिला अभिप्राय नोंदवा! ❤️
+                            </p>
+                        `;
+
+                        return;
+                    }
+
+
+                    reviewsContainer.innerHTML = "";
+
+
+                    data.forEach(function (review) {
+
+                        const card =
+                            document.createElement("div");
+
+                        card.className =
+                            "review-card";
+
+
+                        const name =
+                            reviewsEscapeHTML(
+                                review.name || "ग्राहक"
+                            );
+
+
+                        const feedback =
+                            reviewsEscapeHTML(
+                                review.feedback || ""
+                            );
+
+
+                        let dateText = "";
+
+
+                        if (review.created_at) {
+
+                            const date =
+                                new Date(
+                                    review.created_at
+                                );
+
+
+                            dateText =
+                                date.toLocaleDateString(
+                                    "mr-IN",
+                                    {
+                                        day: "numeric",
+                                        month: "long",
+                                        year: "numeric"
+                                    }
+                                );
+
+                        }
+
+
+                        card.innerHTML = `
+
+                            <div style="
+                                padding:24px;
+                                background:white;
+                                border-radius:12px;
+                                box-shadow:0 4px 15px rgba(0,0,0,0.08);
+                                height:100%;
+                            ">
+
+                                <h3 style="
+                                    margin-bottom:10px;
+                                ">
+                                    ${name}
+                                </h3>
+
+
+                                <div style="
+                                    font-size:20px;
+                                    margin-bottom:12px;
+                                ">
+                                    ⭐⭐⭐⭐⭐
+                                </div>
+
+
+                                <p style="
+                                    line-height:1.7;
+                                    margin-bottom:10px;
+                                ">
+                                    ${feedback}
+                                </p>
+
+
+                                <small style="
+                                    opacity:0.6;
+                                ">
+                                    ${dateText}
+                                </small>
+
+                            </div>
+
+                        `;
+
+
+                        reviewsContainer.appendChild(card);
+
+                    });
+
+                }
+
+                catch (error) {
 
                     console.error(
-                        "Supabase Insert Error:",
+                        "Reviews Load Unexpected Error:",
                         error
                     );
 
 
-                    alert(
-                        "Review submit झाला नाही. कृपया पुन्हा प्रयत्न करा."
-                    );
+                    reviewsContainer.innerHTML = `
+                        <p>
+                            अभिप्राय लोड करण्यात अडचण आली.
+                        </p>
+                    `;
 
-                    return;
                 }
 
-
-                alert(
-                    "तुमचा अभिप्राय यशस्वीरित्या नोंदवला गेला! ❤️"
-                );
-
-
-                reviewForm.reset();
-
-
-                await loadReviews();
-
             }
 
-            catch (error) {
 
-                console.error(
-                    "Unexpected Error:",
-                    error
-                );
+            /* Submit Review */
+            reviewForm.addEventListener(
+                "submit",
+                async function (event) {
 
-
-                alert(
-                    "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा."
-                );
-
-            }
-
-            finally {
-
-                submitButton.disabled = false;
-
-                submitButton.innerText =
-                    "अभिप्राय पाठवा";
-
-            }
-
-        }
-    );
+                    event.preventDefault();
 
 
-    // Initial load
-    loadReviews();
+                    const name =
+                        document
+                            .getElementById("review-name")
+                            .value
+                            .trim();
 
-</script>
-```
+
+                    const email =
+                        document
+                            .getElementById("review-email")
+                            .value
+                            .trim();
+
+
+                    const feedback =
+                        document
+                            .getElementById("review-text")
+                            .value
+                            .trim();
+
+
+                    const notifyStock =
+                        document
+                            .getElementById("stock-notification")
+                            .checked;
+
+
+                    /* Validation */
+
+                    if (
+                        !name ||
+                        !email ||
+                        !feedback
+                    ) {
+
+                        alert(
+                            "कृपया सर्व माहिती भरा."
+                        );
+
+                        return;
+                    }
+
+
+                    const emailPattern =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                    if (
+                        !emailPattern.test(email)
+                    ) {
+
+                        alert(
+                            "कृपया योग्य ई-मेल टाका."
+                        );
+
+                        return;
+                    }
+
+
+                    submitButton.disabled = true;
+
+                    submitButton.innerText =
+                        "पाठवत आहे...";
+
+
+                    try {
+
+                        const result =
+                            await reviewsSupabase
+                                .from("reviews")
+                                .insert([
+                                    {
+                                        name: name,
+                                        email: email,
+                                        feedback: feedback,
+                                        notify_stock: notifyStock,
+                                        approved: true
+                                    }
+                                ]);
+
+
+                        const error =
+                            result.error;
+
+
+                        if (error) {
+
+                            console.error(
+                                "Supabase Insert Error:",
+                                error
+                            );
+
+
+                            alert(
+                                "Review submit झाला नाही. कृपया पुन्हा प्रयत्न करा."
+                            );
+
+                            return;
+                        }
+
+
+                        alert(
+                            "तुमचा अभिप्राय यशस्वीरित्या नोंदवला गेला! ❤️"
+                        );
+
+
+                        reviewForm.reset();
+
+
+                        await reviewsLoad();
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "Unexpected Review Error:",
+                            error
+                        );
+
+
+                        alert(
+                            "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा."
+                        );
+
+                    }
+
+                    finally {
+
+                        submitButton.disabled = false;
+
+                        submitButton.innerText =
+                            "अभिप्राय पाठवा";
+
+                    }
+
+                }
+            );
+
+
+            /* Initial Load */
+            await reviewsLoad();
+
+
+            console.log(
+                "✅ Reviews Supabase system loaded successfully"
+            );
+
+        })();
+
+    </script>
 
 </body>
 
