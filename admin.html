@@ -56,7 +56,9 @@
         }
 
         .stock-form-card,
-        .stock-list-card {
+        .stock-list-card,
+        .gallery-form-card,
+        .gallery-list-card {
             background: #fff;
             padding: 30px;
             border-radius: 15px;
@@ -65,7 +67,9 @@
         }
 
         .stock-form-card h2,
-        .stock-list-card h2 {
+        .stock-list-card h2,
+        .gallery-form-card h2,
+        .gallery-list-card h2 {
             margin-top: 0;
         }
 
@@ -120,7 +124,8 @@
             cursor: not-allowed;
         }
 
-        #stockMessage {
+        #stockMessage,
+        #galleryMessage {
             margin-top: 15px;
             text-align: center;
             font-weight: 600;
@@ -172,6 +177,47 @@
             margin-top: 10px;
         }
 
+        /* =========================
+           GALLERY
+        ========================= */
+
+        .gallery-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-info {
+            padding: 15px;
+        }
+
+        .gallery-item-info h3 {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .gallery-delete-btn {
+            background: #b91c1c;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
         .empty-message {
             color: #777;
             text-align: center;
@@ -214,7 +260,17 @@
             display: none;
         }
 
+        .section-note {
+            background: #fff8e7;
+            border-left: 4px solid #c89b3c;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #555;
+        }
+
         @media (max-width: 600px) {
+
             .admin-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -223,13 +279,23 @@
             .logout-btn {
                 width: 100%;
             }
+
+            .stock-form-card,
+            .stock-list-card,
+            .gallery-form-card,
+            .gallery-list-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- LOGIN -->
+    <!-- =========================================
+         ADMIN LOGIN
+    ========================================== -->
+
     <section id="loginSection" class="admin-page">
 
         <div class="login-card">
@@ -254,7 +320,10 @@
                     required
                 >
 
-                <button type="submit" class="admin-btn login-btn">
+                <button
+                    type="submit"
+                    class="admin-btn login-btn"
+                >
                     Login
                 </button>
 
@@ -267,17 +336,31 @@
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- =========================================
+         DASHBOARD
+    ========================================== -->
+
     <section id="dashboard" class="admin-page">
 
         <div class="admin-wrapper">
 
-            <!-- HEADER -->
+
+            <!-- =================================
+                 HEADER
+            ================================== -->
+
             <div class="admin-header">
 
                 <div>
-                    <h1>Bablu Garments Admin</h1>
-                    <p>Manage your new stock</p>
+
+                    <h1>
+                        Bablu Garments Admin
+                    </h1>
+
+                    <p>
+                        Manage your website content
+                    </p>
+
                 </div>
 
                 <button
@@ -290,12 +373,18 @@
             </div>
 
 
-            <!-- ADD STOCK -->
+            <!-- =================================
+                 ADD NEW STOCK
+            ================================== -->
+
             <div class="stock-form-card">
 
-                <h2>📦 Add New Stock</h2>
+                <h2>
+                    📦 Add New Stock
+                </h2>
 
                 <form id="stockForm">
+
 
                     <div class="form-group">
 
@@ -319,7 +408,10 @@
                             Category
                         </label>
 
-                        <select id="stockCategory" required>
+                        <select
+                            id="stockCategory"
+                            required
+                        >
 
                             <option value="">
                                 Select Category
@@ -382,11 +474,13 @@
                             class="image-preview"
                             id="imagePreview"
                         >
+
                             <img
                                 id="previewImage"
                                 src=""
                                 alt="Preview"
                             >
+
                         </div>
 
                     </div>
@@ -407,28 +501,150 @@
             </div>
 
 
-            <!-- STOCK LIST -->
+            <!-- =================================
+                 CURRENT STOCK
+            ================================== -->
+
             <div class="stock-list-card">
 
-                <h2>📋 Current Stock</h2>
+                <h2>
+                    📋 Current Stock
+                </h2>
 
                 <div
                     class="stock-list"
                     id="stockList"
                 >
+
                     <div class="empty-message">
                         Loading stock...
                     </div>
+
                 </div>
 
             </div>
+
+
+            <!-- =================================
+                 ADD GALLERY IMAGE
+            ================================== -->
+
+            <div class="gallery-form-card">
+
+                <h2>
+                    🖼️ Add Gallery Image
+                </h2>
+
+                <div class="section-note">
+                    Gallery मध्ये दुकानाचे फोटो, कपड्यांचे फोटो किंवा
+                    collection चे फोटो इथून upload करा.
+                    Website code बदलण्याची गरज नाही.
+                </div>
+
+                <form id="galleryForm">
+
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                        <label for="galleryTitle">
+                            Image Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="galleryTitle"
+                            placeholder="उदा. आमच्या दुकानाची आतील झलक"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group">
+
+                        <label for="galleryImage">
+                            Gallery Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="galleryImage"
+                            accept="image/*"
+                            required
+                        >
+
+                        <div
+                            class="image-preview"
+                            id="galleryImagePreview"
+                        >
+
+                            <img
+                                id="galleryPreviewImage"
+                                src=""
+                                alt="Gallery Preview"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="admin-btn publish-btn"
+                        id="galleryPublishBtn"
+                    >
+                        Upload Gallery Image
+                    </button>
+
+                </form>
+
+                <div id="galleryMessage"></div>
+
+            </div>
+
+
+            <!-- =================================
+                 CURRENT GALLERY
+            ================================== -->
+
+            <div class="gallery-list-card">
+
+                <h2>
+                    🖼️ Current Gallery
+                </h2>
+
+                <div
+                    class="gallery-list"
+                    id="galleryList"
+                >
+
+                    <div class="empty-message">
+                        Loading gallery...
+                    </div>
+
+                </div>
+
+            </div>
+
 
         </div>
 
     </section>
 
 
-    <script type="module" src="js/admin.js"></script>
+    <!-- =========================================
+         ADMIN JAVASCRIPT
+    ========================================== -->
+
+    <script
+        type="module"
+        src="js/admin.js"
+    ></script>
 
 </body>
 </html>

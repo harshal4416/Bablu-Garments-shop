@@ -1,7 +1,4 @@
-import {
-    createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 // ==========================================
 // SUPABASE CONFIG
@@ -18,229 +15,50 @@ const supabase = createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-
 // ==========================================
 // ELEMENTS
 // ==========================================
 
-const loginSection =
-    document.getElementById("loginSection");
+const loginSection = document.getElementById("loginSection");
+const dashboard = document.getElementById("dashboard");
 
-const dashboard =
-    document.getElementById("dashboard");
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+const logoutBtn = document.getElementById("logoutBtn");
 
-const loginForm =
-    document.getElementById("loginForm");
+// STOCK
+const stockForm = document.getElementById("stockForm");
+const stockName = document.getElementById("stockName");
+const stockCategory = document.getElementById("stockCategory");
+const stockDescription = document.getElementById("stockDescription");
+const stockImage = document.getElementById("stockImage");
+const imagePreview = document.getElementById("imagePreview");
+const previewImage = document.getElementById("previewImage");
+const publishBtn = document.getElementById("publishBtn");
+const stockMessage = document.getElementById("stockMessage");
+const stockList = document.getElementById("stockList");
 
-const loginMessage =
-    document.getElementById("loginMessage");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const stockForm =
-    document.getElementById("stockForm");
-
-const stockName =
-    document.getElementById("stockName");
-
-const stockCategory =
-    document.getElementById("stockCategory");
-
-const stockDescription =
-    document.getElementById("stockDescription");
-
-const stockImage =
-    document.getElementById("stockImage");
-
-const imagePreview =
-    document.getElementById("imagePreview");
-
-const previewImage =
-    document.getElementById("previewImage");
-
-const publishBtn =
-    document.getElementById("publishBtn");
-
-const stockMessage =
-    document.getElementById("stockMessage");
-
-const stockList =
-    document.getElementById("stockList");
-
+// GALLERY
+const galleryForm = document.getElementById("galleryForm");
+const galleryTitle = document.getElementById("galleryTitle");
+const galleryImage = document.getElementById("galleryImage");
+const galleryImagePreview = document.getElementById("galleryImagePreview");
+const galleryPreviewImage = document.getElementById("galleryPreviewImage");
+const galleryPublishBtn = document.getElementById("galleryPublishBtn");
+const galleryMessage = document.getElementById("galleryMessage");
+const galleryList = document.getElementById("galleryList");
 
 // ==========================================
 // CATEGORY NAMES
 // ==========================================
 
 const categoryNames = {
-
     boys: "मुलांचे कपडे",
-
     girls: "मुलींचे कपडे",
-
     baby: "बेबी वेअर",
-
     party: "पार्टी वेअर",
-
     casual: "कॅज्युअल वेअर"
-
 };
-
-
-// ==========================================
-// IMAGE COMPRESSION
-// ==========================================
-
-async function compressImage(file) {
-
-    return new Promise((resolve, reject) => {
-
-        const img = new Image();
-
-        const canvas =
-            document.createElement("canvas");
-
-        const ctx =
-            canvas.getContext("2d");
-
-
-        img.onload = () => {
-
-            const MAX_WIDTH = 1000;
-            const MAX_HEIGHT = 1000;
-
-            let width = img.width;
-            let height = img.height;
-
-
-            // Resize image
-            if (
-                width > MAX_WIDTH ||
-                height > MAX_HEIGHT
-            ) {
-
-                const ratio =
-                    Math.min(
-                        MAX_WIDTH / width,
-                        MAX_HEIGHT / height
-                    );
-
-                width =
-                    Math.round(
-                        width * ratio
-                    );
-
-                height =
-                    Math.round(
-                        height * ratio
-                    );
-            }
-
-
-            canvas.width = width;
-            canvas.height = height;
-
-
-            // Draw resized image
-            ctx.drawImage(
-                img,
-                0,
-                0,
-                width,
-                height
-            );
-
-
-            // Convert to JPEG
-            canvas.toBlob(
-                (blob) => {
-
-                    if (!blob) {
-
-                        reject(
-                            new Error(
-                                "Image compression failed."
-                            )
-                        );
-
-                        return;
-                    }
-
-
-                    const compressedFile =
-                        new File(
-                            [
-                                blob
-                            ],
-                            "stock-" +
-                                Date.now() +
-                                ".jpg",
-                            {
-                                type:
-                                    "image/jpeg",
-
-                                lastModified:
-                                    Date.now()
-                            }
-                        );
-
-
-                    console.log(
-                        "Original image:",
-                        (
-                            file.size /
-                            1024 /
-                            1024
-                        ).toFixed(2),
-                        "MB"
-                    );
-
-
-                    console.log(
-                        "Compressed image:",
-                        (
-                            compressedFile.size /
-                            1024 /
-                            1024
-                        ).toFixed(2),
-                        "MB"
-                    );
-
-
-                    resolve(
-                        compressedFile
-                    );
-
-                },
-                "image/jpeg",
-                0.80
-            );
-
-
-            URL.revokeObjectURL(
-                img.src
-            );
-        };
-
-
-        img.onerror = () => {
-
-            reject(
-                new Error(
-                    "Unable to read image."
-                )
-            );
-
-        };
-
-
-        img.src =
-            URL.createObjectURL(file);
-
-    });
-}
-
 
 // ==========================================
 // SHOW LOGIN
@@ -255,9 +73,7 @@ function showLogin() {
     if (dashboard) {
         dashboard.style.display = "none";
     }
-
 }
-
 
 // ==========================================
 // SHOW DASHBOARD
@@ -272,9 +88,101 @@ function showDashboard() {
     if (dashboard) {
         dashboard.style.display = "block";
     }
-
 }
 
+// ==========================================
+// COMPRESS IMAGE
+// ==========================================
+
+async function compressImage(file) {
+
+    return new Promise((resolve, reject) => {
+
+        const img = new Image();
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const objectURL = URL.createObjectURL(file);
+
+        img.onload = () => {
+
+            const MAX_WIDTH = 1200;
+            const MAX_HEIGHT = 1200;
+
+            let width = img.width;
+            let height = img.height;
+
+            if (
+                width > MAX_WIDTH ||
+                height > MAX_HEIGHT
+            ) {
+
+                const ratio = Math.min(
+                    MAX_WIDTH / width,
+                    MAX_HEIGHT / height
+                );
+
+                width = Math.round(width * ratio);
+                height = Math.round(height * ratio);
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+            );
+
+            canvas.toBlob(
+                (blob) => {
+
+                    URL.revokeObjectURL(objectURL);
+
+                    if (!blob) {
+
+                        reject(
+                            new Error(
+                                "Image compression failed."
+                            )
+                        );
+
+                        return;
+                    }
+
+                    const compressedFile = new File(
+                        [blob],
+                        `image-${Date.now()}.jpg`,
+                        {
+                            type: "image/jpeg",
+                            lastModified: Date.now()
+                        }
+                    );
+
+                    resolve(compressedFile);
+                },
+                "image/jpeg",
+                0.82
+            );
+        };
+
+        img.onerror = () => {
+
+            URL.revokeObjectURL(objectURL);
+
+            reject(
+                new Error(
+                    "Unable to read image."
+                )
+            );
+        };
+
+        img.src = objectURL;
+    });
+}
 
 // ==========================================
 // CHECK ADMIN
@@ -290,14 +198,11 @@ async function checkAdmin() {
             }
         } = await supabase.auth.getUser();
 
-
         if (!user) {
 
             showLogin();
-
             return;
         }
-
 
         const {
             data,
@@ -308,7 +213,6 @@ async function checkAdmin() {
             .eq("user_id", user.id)
             .maybeSingle();
 
-
         if (error) {
 
             console.error(
@@ -317,10 +221,8 @@ async function checkAdmin() {
             );
 
             showLogin();
-
             return;
         }
-
 
         if (!data) {
 
@@ -332,16 +234,15 @@ async function checkAdmin() {
 
                 loginMessage.textContent =
                     "You are not authorized as an admin.";
-
             }
 
             return;
         }
 
-
         showDashboard();
 
         await loadStock();
+        await loadGallery();
 
     } catch (error) {
 
@@ -351,11 +252,8 @@ async function checkAdmin() {
         );
 
         showLogin();
-
     }
-
 }
-
 
 // ==========================================
 // LOGIN
@@ -369,39 +267,29 @@ if (loginForm) {
 
             event.preventDefault();
 
-
             const email =
-                document
-                    .getElementById("email")
+                document.getElementById("email")
                     .value
                     .trim();
 
-
             const password =
-                document
-                    .getElementById("password")
+                document.getElementById("password")
                     .value;
-
 
             if (loginMessage) {
 
                 loginMessage.textContent =
                     "Logging in...";
-
             }
-
 
             const {
                 error
-            } =
-                await supabase.auth.signInWithPassword({
+            } = await supabase.auth.signInWithPassword({
 
-                    email: email,
+                email,
+                password
 
-                    password: password
-
-                });
-
+            });
 
             if (error) {
 
@@ -410,32 +298,23 @@ if (loginForm) {
                     error
                 );
 
-
                 if (loginMessage) {
 
                     loginMessage.textContent =
                         error.message;
-
                 }
 
                 return;
             }
 
-
             if (loginMessage) {
-
                 loginMessage.textContent = "";
-
             }
 
-
             await checkAdmin();
-
         }
     );
-
 }
-
 
 // ==========================================
 // LOGOUT
@@ -452,19 +331,14 @@ if (logoutBtn) {
             showLogin();
 
             if (loginForm) {
-
                 loginForm.reset();
-
             }
-
         }
     );
-
 }
 
-
 // ==========================================
-// IMAGE PREVIEW
+// IMAGE PREVIEW - STOCK
 // ==========================================
 
 if (stockImage) {
@@ -476,45 +350,64 @@ if (stockImage) {
             const file =
                 stockImage.files[0];
 
-
             if (!file) {
 
                 if (imagePreview) {
-
-                    imagePreview.style.display =
-                        "none";
-
+                    imagePreview.style.display = "none";
                 }
 
                 return;
             }
 
-
-            // Show selected image immediately
             const imageURL =
                 URL.createObjectURL(file);
 
-
             if (previewImage) {
-
-                previewImage.src =
-                    imageURL;
-
+                previewImage.src = imageURL;
             }
-
 
             if (imagePreview) {
-
-                imagePreview.style.display =
-                    "block";
-
+                imagePreview.style.display = "block";
             }
-
         }
     );
-
 }
 
+// ==========================================
+// IMAGE PREVIEW - GALLERY
+// ==========================================
+
+if (galleryImage) {
+
+    galleryImage.addEventListener(
+        "change",
+        () => {
+
+            const file =
+                galleryImage.files[0];
+
+            if (!file) {
+
+                if (galleryImagePreview) {
+                    galleryImagePreview.style.display = "none";
+                }
+
+                return;
+            }
+
+            const imageURL =
+                URL.createObjectURL(file);
+
+            if (galleryPreviewImage) {
+                galleryPreviewImage.src = imageURL;
+            }
+
+            if (galleryImagePreview) {
+                galleryImagePreview.style.display = "block";
+            }
+        }
+    );
+}
 
 // ==========================================
 // ADD NEW STOCK
@@ -528,142 +421,52 @@ if (stockForm) {
 
             event.preventDefault();
 
-
             const originalFile =
                 stockImage.files[0];
 
-
-            // --------------------------------------
-            // CHECK IMAGE
-            // --------------------------------------
-
             if (!originalFile) {
 
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Please select an image.";
-
-                }
+                stockMessage.textContent =
+                    "Please select an image.";
 
                 return;
             }
-
-
-            // --------------------------------------
-            // CHECK ORIGINAL FILE SIZE
-            // --------------------------------------
 
             if (
                 originalFile.size >
                 15 * 1024 * 1024
             ) {
 
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Image size must be less than 15 MB.";
-
-                }
+                stockMessage.textContent =
+                    "Image size must be less than 15 MB.";
 
                 return;
             }
 
-
-            // --------------------------------------
-            // CHECK STOCK NAME
-            // --------------------------------------
-
-            if (
-                !stockName.value.trim()
-            ) {
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Please enter stock name.";
-
-                }
-
-                return;
-            }
-
-
-            // --------------------------------------
-            // CHECK CATEGORY
-            // --------------------------------------
-
-            if (
-                !stockCategory.value
-            ) {
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Please select a category.";
-
-                }
-
-                return;
-            }
-
-
-            // --------------------------------------
-            // DISABLE BUTTON
-            // --------------------------------------
-
-            publishBtn.disabled =
-                true;
-
+            publishBtn.disabled = true;
 
             try {
-
-                // --------------------------------------
-                // CHECK LOGIN
-                // --------------------------------------
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Checking admin access...";
-
-                }
-
 
                 const {
                     data: {
                         user
                     }
-                } =
-                    await supabase.auth.getUser();
-
+                } = await supabase.auth.getUser();
 
                 if (!user) {
-
                     throw new Error(
                         "Please login again."
                     );
-
                 }
-
-
-                // --------------------------------------
-                // CHECK ADMIN
-                // --------------------------------------
 
                 const {
                     data: adminData,
                     error: adminError
-                } =
-                    await supabase
-                        .from("admins")
-                        .select("user_id")
-                        .eq(
-                            "user_id",
-                            user.id
-                        )
-                        .maybeSingle();
-
+                } = await supabase
+                    .from("admins")
+                    .select("user_id")
+                    .eq("user_id", user.id)
+                    .maybeSingle();
 
                 if (
                     adminError ||
@@ -673,187 +476,101 @@ if (stockForm) {
                     throw new Error(
                         "Admin access denied."
                     );
-
                 }
 
-
-                // --------------------------------------
-                // COMPRESS IMAGE
-                // --------------------------------------
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Optimizing image...";
-
-                }
-
+                stockMessage.textContent =
+                    "Optimizing image...";
 
                 const file =
                     await compressImage(
                         originalFile
                     );
 
-
-                // --------------------------------------
-                // CREATE UNIQUE FILE NAME
-                // --------------------------------------
-
                 const fileName =
                     `${Date.now()}-${crypto.randomUUID()}.jpg`;
-
 
                 const filePath =
                     `stock/${fileName}`;
 
-
-                // --------------------------------------
-                // UPLOAD IMAGE
-                // --------------------------------------
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Uploading image...";
-
-                }
-
+                stockMessage.textContent =
+                    "Uploading image...";
 
                 const {
                     error: uploadError
-                } =
-                    await supabase.storage
-                        .from("stock-images")
-                        .upload(
-                            filePath,
-                            file,
-                            {
-                                cacheControl:
-                                    "31536000",
-
-                                contentType:
-                                    "image/jpeg",
-
-                                upsert:
-                                    false
-                            }
-                        );
-
+                } = await supabase.storage
+                    .from("stock-images")
+                    .upload(
+                        filePath,
+                        file,
+                        {
+                            cacheControl: "31536000",
+                            contentType: "image/jpeg",
+                            upsert: false
+                        }
+                    );
 
                 if (uploadError) {
-
                     throw uploadError;
-
                 }
-
-
-                // --------------------------------------
-                // GET PUBLIC URL
-                // --------------------------------------
 
                 const {
                     data: publicURLData
-                } =
-                    supabase.storage
-                        .from("stock-images")
-                        .getPublicUrl(
-                            filePath
-                        );
-
+                } = supabase.storage
+                    .from("stock-images")
+                    .getPublicUrl(filePath);
 
                 const imageURL =
                     publicURLData.publicUrl;
 
-
-                // --------------------------------------
-                // SAVE STOCK IN DATABASE
-                // --------------------------------------
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "Saving stock...";
-
-                }
-
+                stockMessage.textContent =
+                    "Saving stock...";
 
                 const {
                     error: insertError
-                } =
-                    await supabase
-                        .from("stock")
-                        .insert({
+                } = await supabase
+                    .from("stock")
+                    .insert({
 
-                            name:
-                                stockName.value.trim(),
+                        name:
+                            stockName.value.trim(),
 
-                            category:
-                                stockCategory.value,
+                        category:
+                            stockCategory.value,
 
-                            description:
-                                stockDescription.value.trim(),
+                        description:
+                            stockDescription.value.trim(),
 
-                            image_url:
-                                imageURL,
+                        image_url:
+                            imageURL,
 
-                            is_active:
-                                true
+                        is_active:
+                            true
 
-                        });
-
-
-                // --------------------------------------
-                // IF DATABASE INSERT FAILS
-                // DELETE IMAGE
-                // --------------------------------------
+                    });
 
                 if (insertError) {
 
                     await supabase.storage
                         .from("stock-images")
-                        .remove([
-                            filePath
-                        ]);
+                        .remove([filePath]);
 
                     throw insertError;
-
                 }
 
+                stockMessage.textContent =
+                    "✅ Stock published successfully!";
 
-                // --------------------------------------
-                // SUCCESS
-                // --------------------------------------
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "✅ Stock published successfully!";
-
-                }
-
-
-                // Reset form
                 stockForm.reset();
 
-
                 if (imagePreview) {
-
-                    imagePreview.style.display =
-                        "none";
-
+                    imagePreview.style.display = "none";
                 }
-
 
                 if (previewImage) {
-
                     previewImage.src = "";
-
                 }
 
-
-                // Reload stock list
                 await loadStock();
-
 
             } catch (error) {
 
@@ -862,30 +579,20 @@ if (stockForm) {
                     error
                 );
 
-
-                if (stockMessage) {
-
-                    stockMessage.textContent =
-                        "❌ " +
-                        (
-                            error.message ||
-                            "Something went wrong."
-                        );
-
-                }
+                stockMessage.textContent =
+                    "❌ " +
+                    (
+                        error.message ||
+                        "Something went wrong."
+                    );
 
             } finally {
 
-                publishBtn.disabled =
-                    false;
-
+                publishBtn.disabled = false;
             }
-
         }
     );
-
 }
-
 
 // ==========================================
 // LOAD STOCK
@@ -894,109 +601,75 @@ if (stockForm) {
 async function loadStock() {
 
     if (!stockList) {
-
         return;
-
     }
 
-
-    stockList.innerHTML =
-        `
+    stockList.innerHTML = `
         <div class="empty-message">
             Loading stock...
         </div>
-        `;
-
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabase
-                .from("stock")
-                .select(
-                    "id,name,category,description,image_url,is_active,created_at"
-                )
-                .eq(
-                    "is_active",
-                    true
-                )
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Load stock error:",
-                error
+        } = await supabase
+            .from("stock")
+            .select(
+                "id,name,category,description,image_url,is_active,created_at"
+            )
+            .eq(
+                "is_active",
+                true
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
             );
 
-
-            stockList.innerHTML =
-                `
-                <div class="empty-message">
-                    Unable to load stock.
-                </div>
-                `;
-
-            return;
+        if (error) {
+            throw error;
         }
-
 
         if (
             !data ||
             data.length === 0
         ) {
 
-            stockList.innerHTML =
-                `
+            stockList.innerHTML = `
                 <div class="empty-message">
                     No stock added yet.
                 </div>
-                `;
+            `;
 
             return;
         }
 
-
         stockList.innerHTML = "";
-
 
         data.forEach(
             (item) => {
 
                 const card =
-                    document.createElement(
-                        "div"
-                    );
-
+                    document.createElement("div");
 
                 card.className =
                     "stock-item";
 
-
                 const categoryName =
-                    categoryNames[
-                        item.category
-                    ] ||
+                    categoryNames[item.category] ||
                     item.category ||
                     "Other";
 
-
-                card.innerHTML =
-                    `
+                card.innerHTML = `
                     <img
                         src="${item.image_url}"
                         alt="${item.name}"
                         loading="lazy"
-                        decoding="async"
                     >
 
                     <div class="stock-item-info">
@@ -1022,72 +695,44 @@ async function loadStock() {
                         </button>
 
                     </div>
-                    `;
+                `;
 
-
-                stockList.appendChild(
-                    card
-                );
-
+                stockList.appendChild(card);
             }
         );
 
+        stockList
+            .querySelectorAll(".delete-btn")
+            .forEach(
+                (button) => {
 
-        // --------------------------------------
-        // DELETE BUTTONS
-        // --------------------------------------
+                    button.addEventListener(
+                        "click",
+                        async () => {
 
-        const deleteButtons =
-            stockList.querySelectorAll(
-                ".delete-btn"
+                            await deleteStock(
+                                button.dataset.id,
+                                button.dataset.image
+                            );
+                        }
+                    );
+                }
             );
-
-
-        deleteButtons.forEach(
-            (button) => {
-
-                button.addEventListener(
-                    "click",
-                    async () => {
-
-                        const id =
-                            button.dataset.id;
-
-                        const imageURL =
-                            button.dataset.image;
-
-
-                        await deleteStock(
-                            id,
-                            imageURL
-                        );
-
-                    }
-                );
-
-            }
-        );
-
 
     } catch (error) {
 
         console.error(
-            "Load stock exception:",
+            "Load stock error:",
             error
         );
 
-
-        stockList.innerHTML =
-            `
+        stockList.innerHTML = `
             <div class="empty-message">
                 Unable to load stock.
             </div>
-            `;
-
+        `;
     }
-
 }
-
 
 // ==========================================
 // DELETE STOCK
@@ -1098,103 +743,56 @@ async function deleteStock(
     imageURL
 ) {
 
-    const confirmDelete =
-        confirm(
+    if (
+        !confirm(
             "Are you sure you want to delete this stock?"
-        );
-
-
-    if (!confirmDelete) {
-
+        )
+    ) {
         return;
-
     }
-
 
     try {
 
-        // --------------------------------------
-        // DELETE DATABASE RECORD
-        // --------------------------------------
-
         const {
             error
-        } =
-            await supabase
-                .from("stock")
-                .delete()
-                .eq(
-                    "id",
-                    id
-                );
-
+        } = await supabase
+            .from("stock")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
-
             throw error;
-
         }
-
-
-        // --------------------------------------
-        // DELETE IMAGE
-        // --------------------------------------
 
         if (imageURL) {
 
-            try {
+            const marker =
+                "/storage/v1/object/public/stock-images/";
 
-                const bucketPart =
-                    "/storage/v1/object/public/stock-images/";
-
-
-                if (
-                    imageURL.includes(
-                        bucketPart
-                    )
-                ) {
-
-                    const path =
-                        imageURL.split(
-                            bucketPart
-                        )[1];
-
-
-                    if (path) {
-
-                        await supabase.storage
-                            .from(
-                                "stock-images"
-                            )
-                            .remove([
-                                path
-                            ]);
-
-                    }
-
-                }
-
-            } catch (
-                imageDeleteError
+            if (
+                imageURL.includes(marker)
             ) {
 
-                console.warn(
-                    "Image delete warning:",
-                    imageDeleteError
-                );
+                const path =
+                    imageURL.split(marker)[1];
 
+                if (path) {
+
+                    await supabase.storage
+                        .from("stock-images")
+                        .remove([path]);
+                }
             }
-
         }
-
 
         alert(
             "Stock deleted successfully."
         );
 
-
         await loadStock();
-
 
     } catch (error) {
 
@@ -1203,23 +801,453 @@ async function deleteStock(
             error
         );
 
-
         alert(
             "Unable to delete stock: " +
-            (
-                error.message ||
-                "Something went wrong."
-            )
+            error.message
         );
-
     }
-
 }
 
+// ==================================================
+// GALLERY - UPLOAD
+// ==================================================
 
-// ==========================================
-// AUTH STATE CHANGE
-// ==========================================
+if (galleryForm) {
+
+    galleryForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            const originalFile =
+                galleryImage.files[0];
+
+            if (!originalFile) {
+
+                galleryMessage.textContent =
+                    "Please select a gallery image.";
+
+                return;
+            }
+
+            if (!galleryTitle.value.trim()) {
+
+                galleryMessage.textContent =
+                    "Please enter image title.";
+
+                return;
+            }
+
+            if (
+                originalFile.size >
+                15 * 1024 * 1024
+            ) {
+
+                galleryMessage.textContent =
+                    "Image size must be less than 15 MB.";
+
+                return;
+            }
+
+            galleryPublishBtn.disabled = true;
+
+            try {
+
+                // ----------------------------------
+                // CHECK LOGIN
+                // ----------------------------------
+
+                const {
+                    data: {
+                        user
+                    }
+                } = await supabase.auth.getUser();
+
+                if (!user) {
+
+                    throw new Error(
+                        "Please login again."
+                    );
+                }
+
+                // ----------------------------------
+                // CHECK ADMIN
+                // ----------------------------------
+
+                const {
+                    data: adminData,
+                    error: adminError
+                } = await supabase
+                    .from("admins")
+                    .select("user_id")
+                    .eq(
+                        "user_id",
+                        user.id
+                    )
+                    .maybeSingle();
+
+                if (
+                    adminError ||
+                    !adminData
+                ) {
+
+                    throw new Error(
+                        "Admin access denied."
+                    );
+                }
+
+                // ----------------------------------
+                // COMPRESS
+                // ----------------------------------
+
+                galleryMessage.textContent =
+                    "Optimizing image...";
+
+                const file =
+                    await compressImage(
+                        originalFile
+                    );
+
+                // ----------------------------------
+                // UNIQUE FILE NAME
+                // ----------------------------------
+
+                const fileName =
+                    `${Date.now()}-${crypto.randomUUID()}.jpg`;
+
+                const filePath =
+                    `gallery/${fileName}`;
+
+                // ----------------------------------
+                // UPLOAD
+                // ----------------------------------
+
+                galleryMessage.textContent =
+                    "Uploading gallery image...";
+
+                const {
+                    error: uploadError
+                } = await supabase.storage
+                    .from("gallery-images")
+                    .upload(
+                        filePath,
+                        file,
+                        {
+                            cacheControl: "31536000",
+                            contentType: "image/jpeg",
+                            upsert: false
+                        }
+                    );
+
+                if (uploadError) {
+                    throw uploadError;
+                }
+
+                // ----------------------------------
+                // PUBLIC URL
+                // ----------------------------------
+
+                const {
+                    data: publicURLData
+                } = supabase.storage
+                    .from("gallery-images")
+                    .getPublicUrl(filePath);
+
+                const imageURL =
+                    publicURLData.publicUrl;
+
+                // ----------------------------------
+                // DATABASE
+                // ----------------------------------
+
+                galleryMessage.textContent =
+                    "Saving gallery image...";
+
+                const {
+                    error: insertError
+                } = await supabase
+                    .from("gallery")
+                    .insert({
+
+                        title:
+                            galleryTitle.value.trim(),
+
+                        image_url:
+                            imageURL,
+
+                        is_active:
+                            true
+
+                    });
+
+                // ----------------------------------
+                // DELETE IMAGE IF DB FAILS
+                // ----------------------------------
+
+                if (insertError) {
+
+                    await supabase.storage
+                        .from("gallery-images")
+                        .remove([
+                            filePath
+                        ]);
+
+                    throw insertError;
+                }
+
+                // ----------------------------------
+                // SUCCESS
+                // ----------------------------------
+
+                galleryMessage.textContent =
+                    "✅ Gallery image uploaded successfully!";
+
+                galleryForm.reset();
+
+                if (galleryImagePreview) {
+                    galleryImagePreview.style.display =
+                        "none";
+                }
+
+                if (galleryPreviewImage) {
+                    galleryPreviewImage.src = "";
+                }
+
+                await loadGallery();
+
+            } catch (error) {
+
+                console.error(
+                    "Gallery upload error:",
+                    error
+                );
+
+                galleryMessage.textContent =
+                    "❌ " +
+                    (
+                        error.message ||
+                        "Gallery upload failed."
+                    );
+
+            } finally {
+
+                galleryPublishBtn.disabled = false;
+            }
+        }
+    );
+}
+
+// ==================================================
+// LOAD GALLERY
+// ==================================================
+
+async function loadGallery() {
+
+    if (!galleryList) {
+        return;
+    }
+
+    galleryList.innerHTML = `
+        <div class="empty-message">
+            Loading gallery...
+        </div>
+    `;
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabase
+            .from("gallery")
+            .select(
+                "id,title,image_url,is_active,created_at"
+            )
+            .eq(
+                "is_active",
+                true
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+        if (error) {
+            throw error;
+        }
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            galleryList.innerHTML = `
+                <div class="empty-message">
+                    No gallery images added yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        galleryList.innerHTML = "";
+
+        data.forEach(
+            (item) => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "gallery-item";
+
+                card.innerHTML = `
+                    <img
+                        src="${item.image_url}"
+                        alt="${item.title}"
+                        loading="lazy"
+                    >
+
+                    <div class="gallery-item-info">
+
+                        <h3>
+                            ${item.title}
+                        </h3>
+
+                        <button
+                            class="admin-btn gallery-delete-btn"
+                            data-id="${item.id}"
+                            data-image="${item.image_url}"
+                        >
+                            Delete Image
+                        </button>
+
+                    </div>
+                `;
+
+                galleryList.appendChild(card);
+            }
+        );
+
+        galleryList
+            .querySelectorAll(".gallery-delete-btn")
+            .forEach(
+                (button) => {
+
+                    button.addEventListener(
+                        "click",
+                        async () => {
+
+                            await deleteGalleryImage(
+                                button.dataset.id,
+                                button.dataset.image
+                            );
+                        }
+                    );
+                }
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Load gallery error:",
+            error
+        );
+
+        galleryList.innerHTML = `
+            <div class="empty-message">
+                Unable to load gallery.
+            </div>
+        `;
+    }
+}
+
+// ==================================================
+// DELETE GALLERY IMAGE
+// ==================================================
+
+async function deleteGalleryImage(
+    id,
+    imageURL
+) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this gallery image?"
+        )
+    ) {
+        return;
+    }
+
+    try {
+
+        // DELETE DATABASE RECORD
+
+        const {
+            error
+        } = await supabase
+            .from("gallery")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+        if (error) {
+            throw error;
+        }
+
+        // DELETE STORAGE IMAGE
+
+        if (imageURL) {
+
+            const marker =
+                "/storage/v1/object/public/gallery-images/";
+
+            if (
+                imageURL.includes(marker)
+            ) {
+
+                const path =
+                    imageURL.split(marker)[1];
+
+                if (path) {
+
+                    await supabase.storage
+                        .from("gallery-images")
+                        .remove([
+                            path
+                        ]);
+                }
+            }
+        }
+
+        alert(
+            "Gallery image deleted successfully."
+        );
+
+        await loadGallery();
+
+    } catch (error) {
+
+        console.error(
+            "Delete gallery error:",
+            error
+        );
+
+        alert(
+            "Unable to delete gallery image: " +
+            error.message
+        );
+    }
+}
+
+// ==================================================
+// AUTH STATE
+// ==================================================
 
 supabase.auth.onAuthStateChange(
     (event, session) => {
@@ -1228,18 +1256,15 @@ supabase.auth.onAuthStateChange(
             "Auth event:",
             event
         );
-
     }
 );
 
-
-// ==========================================
-// INITIAL CHECK
-// ==========================================
+// ==================================================
+// START
+// ==================================================
 
 console.log(
     "✅ Bablu Garments admin.js loaded"
 );
-
 
 checkAdmin();
