@@ -4,6 +4,7 @@
  * ============================================
  */
 
+
 /* ============================================
    SUPABASE CONFIGURATION
    ============================================ */
@@ -38,9 +39,7 @@ function initializeSupabase() {
         return true;
     }
 
-    console.error(
-        "❌ Supabase library not loaded."
-    );
+    console.error("❌ Supabase library not loaded.");
 
     return false;
 }
@@ -202,25 +201,20 @@ async function getNewStock() {
             data,
             error
         } = await supabaseClient
-
             .from("stock")
-
             .select(
                 "id,name,category,description,image_url,is_active,created_at"
             )
-
             .eq(
                 "is_active",
                 true
             )
-
             .order(
                 "created_at",
                 {
                     ascending: false
                 }
             );
-
 
         if (error) {
 
@@ -232,12 +226,10 @@ async function getNewStock() {
             return [];
         }
 
-
         console.log(
             "✅ Live stock loaded:",
             data
         );
-
 
         return data || [];
 
@@ -262,39 +254,32 @@ function createStockCard(item) {
     const card =
         document.createElement("div");
 
-
     card.className =
         "item-card filter-item";
-
 
     card.setAttribute(
         "data-category",
         item.category || ""
     );
 
-
     const categoryName =
         categoryNames[item.category] ||
         item.category ||
         "नवीन कलेक्शन";
-
 
     const image =
         item.image_url ||
         item.image ||
         "";
 
-
     const name =
         item.name ||
         item.title ||
         "नवीन स्टॉक";
 
-
     const description =
         item.description ||
         "बबलू गारमेंट्समधील नवीन कलेक्शन.";
-
 
     card.innerHTML = `
 
@@ -333,7 +318,6 @@ function createStockCard(item) {
         </div>
     `;
 
-
     return card;
 }
 
@@ -349,12 +333,9 @@ async function renderNewStock() {
             "stock-grid"
         );
 
-
     if (!stockContainer) {
-
         return;
     }
-
 
     stockContainer.innerHTML = `
 
@@ -369,16 +350,8 @@ async function renderNewStock() {
 
     `;
 
-
     const stock =
         await getNewStock();
-
-
-    /*
-       IMPORTANT:
-       जर database मध्ये stock आहे,
-       तर फक्त database stock दाखवायचा.
-    */
 
     if (stock.length > 0) {
 
@@ -387,7 +360,6 @@ async function renderNewStock() {
         );
 
         stockContainer.innerHTML = "";
-
 
         stock.forEach(
             item => {
@@ -402,30 +374,20 @@ async function renderNewStock() {
             }
         );
 
-
         initLightbox(
             ".item-card"
         );
-
 
         setupFiltering();
 
         return;
     }
 
-
-    /*
-       Database मध्ये stock नसेल
-       तर fallback.
-    */
-
     console.log(
         "ℹ️ No live stock found. Showing fallback."
     );
 
-
     stockContainer.innerHTML = "";
-
 
     fallbackStock.forEach(
         item => {
@@ -440,11 +402,9 @@ async function renderNewStock() {
         }
     );
 
-
     initLightbox(
         ".item-card"
     );
-
 
     setupFiltering();
 }
@@ -461,12 +421,9 @@ async function renderHomePreview() {
             "home-stock-preview"
         );
 
-
     if (!container) {
-
         return;
     }
-
 
     container.innerHTML = `
 
@@ -480,13 +437,10 @@ async function renderHomePreview() {
 
     `;
 
-
     const stock =
         await getNewStock();
 
-
     let displayStock;
-
 
     if (stock.length > 0) {
 
@@ -507,9 +461,7 @@ async function renderHomePreview() {
             fallbackStock;
     }
 
-
     container.innerHTML = "";
-
 
     displayStock
         .slice(0, 4)
@@ -539,15 +491,20 @@ function renderShopGallery() {
             "shop-gallery-grid"
         );
 
-
     if (!container) {
+
+        console.log(
+            "ℹ️ Shop gallery page not detected"
+        );
 
         return;
     }
 
+    console.log(
+        "🖼️ Rendering shop gallery..."
+    );
 
     container.innerHTML = "";
-
 
     shopImages.forEach(
         item => {
@@ -557,10 +514,8 @@ function renderShopGallery() {
                     "div"
                 );
 
-
             galleryItem.className =
                 "masonry-item";
-
 
             galleryItem.innerHTML = `
 
@@ -580,7 +535,6 @@ function renderShopGallery() {
 
             `;
 
-
             container.appendChild(
                 galleryItem
             );
@@ -588,6 +542,9 @@ function renderShopGallery() {
         }
     );
 
+    console.log(
+        `✅ Shop gallery rendered: ${shopImages.length} images`
+    );
 
     initLightbox(
         ".masonry-item"
@@ -611,18 +568,15 @@ function initLightbox(selector) {
             "lightbox"
         );
 
-
     const lightboxImg =
         document.getElementById(
             "lightbox-img"
         );
 
-
     const caption =
         document.getElementById(
             "lightbox-caption"
         );
-
 
     if (
         !lightbox ||
@@ -632,12 +586,10 @@ function initLightbox(selector) {
         return;
     }
 
-
     const items =
         document.querySelectorAll(
             selector
         );
-
 
     if (
         items.length === 0
@@ -646,44 +598,39 @@ function initLightbox(selector) {
         return;
     }
 
-
     galleryImages = [];
 
-
     items.forEach(
-        (item, index) => {
+        item => {
 
             const img =
                 item.querySelector(
                     "img"
                 );
 
-
             if (!img) {
-
                 return;
             }
-
 
             const title =
                 item.querySelector(
                     ".item-title"
                 );
 
-
             const overlay =
                 item.querySelector(
                     ".masonry-overlay span"
                 );
-
 
             const itemCaption =
                 title
                     ? title.textContent
                     : overlay
                         ? overlay.textContent
-                        : "";
+                        : img.alt || "";
 
+            const imageIndex =
+                galleryImages.length;
 
             galleryImages.push({
 
@@ -695,19 +642,15 @@ function initLightbox(selector) {
 
             });
 
-
             item.onclick =
                 function(event) {
 
                     event.preventDefault();
 
-
                     currentImageIndex =
-                        index;
-
+                        imageIndex;
 
                     openLightbox();
-
                 };
 
         }
@@ -723,14 +666,11 @@ function initLightbox(selector) {
             return;
         }
 
-
         updateLightbox();
-
 
         lightbox.classList.add(
             "active"
         );
-
 
         document.body.style.overflow =
             "hidden";
@@ -742,7 +682,6 @@ function initLightbox(selector) {
         lightbox.classList.remove(
             "active"
         );
-
 
         document.body.style.overflow =
             "auto";
@@ -756,16 +695,12 @@ function initLightbox(selector) {
                 currentImageIndex
             ];
 
-
         if (!item) {
-
             return;
         }
 
-
         lightboxImg.src =
             item.src;
-
 
         if (caption) {
 
@@ -773,7 +708,6 @@ function initLightbox(selector) {
                 item.caption;
 
         }
-
     }
 
 
@@ -782,12 +716,10 @@ function initLightbox(selector) {
             ".lightbox-close"
         );
 
-
     const prev =
         document.querySelector(
             ".lightbox-prev"
         );
-
 
     const next =
         document.querySelector(
@@ -810,7 +742,6 @@ function initLightbox(selector) {
 
                 event.stopPropagation();
 
-
                 currentImageIndex =
                     (
                         currentImageIndex -
@@ -818,7 +749,6 @@ function initLightbox(selector) {
                         galleryImages.length
                     ) %
                     galleryImages.length;
-
 
                 updateLightbox();
 
@@ -834,14 +764,12 @@ function initLightbox(selector) {
 
                 event.stopPropagation();
 
-
                 currentImageIndex =
                     (
                         currentImageIndex +
                         1
                     ) %
                     galleryImages.length;
-
 
                 updateLightbox();
 
@@ -898,7 +826,6 @@ function initLightbox(selector) {
                     ) %
                     galleryImages.length;
 
-
                 updateLightbox();
 
             }
@@ -915,13 +842,11 @@ function initLightbox(selector) {
                     ) %
                     galleryImages.length;
 
-
                 updateLightbox();
 
             }
 
         };
-
 }
 
 
@@ -936,12 +861,9 @@ function setupFiltering() {
             ".filter-btn"
         );
 
-
     if (!buttons.length) {
-
         return;
     }
-
 
     buttons.forEach(
         button => {
@@ -959,23 +881,19 @@ function setupFiltering() {
                         }
                     );
 
-
                     button.classList.add(
                         "active"
                     );
-
 
                     const filter =
                         button.getAttribute(
                             "data-filter"
                         );
 
-
                     const items =
                         document.querySelectorAll(
                             ".filter-item"
                         );
-
 
                     items.forEach(
                         item => {
@@ -984,7 +902,6 @@ function setupFiltering() {
                                 item.getAttribute(
                                     "data-category"
                                 );
-
 
                             if (
                                 filter === "all" ||
@@ -1022,12 +939,10 @@ function setupMobileMenu() {
             ".hamburger"
         );
 
-
     const navLinks =
         document.querySelector(
             ".nav-links"
         );
-
 
     if (
         !hamburger ||
@@ -1037,7 +952,6 @@ function setupMobileMenu() {
         return;
     }
 
-
     hamburger.onclick =
         function() {
 
@@ -1045,12 +959,10 @@ function setupMobileMenu() {
                 "active"
             );
 
-
             const spans =
                 hamburger.querySelectorAll(
                     "span"
                 );
-
 
             if (
                 navLinks.classList.contains(
@@ -1065,14 +977,12 @@ function setupMobileMenu() {
 
                 }
 
-
                 if (spans[1]) {
 
                     spans[1].style.opacity =
                         "0";
 
                 }
-
 
                 if (spans[2]) {
 
@@ -1112,12 +1022,10 @@ function setupActiveNav() {
             .split("/")
             .pop();
 
-
     const navItems =
         document.querySelectorAll(
             ".nav-links a"
         );
-
 
     navItems.forEach(
         link => {
@@ -1126,7 +1034,6 @@ function setupActiveNav() {
                 link.getAttribute(
                     "href"
                 );
-
 
             if (
                 href === currentPath ||
@@ -1158,18 +1065,15 @@ function setupNotification() {
             "notif-banner"
         );
 
-
     const badge =
         document.querySelector(
             ".notification-badge"
         );
 
-
     const isStockPage =
         window.location.pathname.includes(
             "new-stock.html"
         );
-
 
     if (
         banner &&
@@ -1181,7 +1085,6 @@ function setupNotification() {
         );
 
     }
-
 
     if (badge) {
 
@@ -1205,22 +1108,21 @@ document.addEventListener(
             "🚀 Bablu Garments website started"
         );
 
-
         setupMobileMenu();
 
         setupActiveNav();
 
         setupNotification();
 
+        /*
+         * Render shop gallery only
+         * when shop-gallery-grid exists.
+         */
         renderShopGallery();
 
-
         /*
-           Important:
-           Homepage par dono Supabase calls
-           ek saath chal sakti hain.
-        */
-
+         * Load stock pages/homepage.
+         */
         await Promise.all([
 
             renderNewStock(),
@@ -1228,7 +1130,6 @@ document.addEventListener(
             renderHomePreview()
 
         ]);
-
 
         console.log(
             "✅ Website initialization completed"
