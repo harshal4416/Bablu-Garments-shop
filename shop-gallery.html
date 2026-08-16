@@ -6,86 +6,120 @@
 
     <title>आमच्या दुकानाची झलक | बबलू गारमेंट्स</title>
 
-    <meta name="description"
-          content="बबलू गारमेंट्सच्या दुकानाची आणि कलेक्शनची एक छोटीशी झलक.">
+    <meta
+        name="description"
+        content="बबलू गारमेंट्सच्या दुकानाची आणि कलेक्शनची एक छोटीशी झलक."
+    >
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300;500;700&family=Rozha+One&family=Yatra+One&display=swap"
+        rel="stylesheet"
+    >
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
 
     <!-- ============================= -->
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <!-- ============================= -->
 
     <nav class="navbar">
 
         <a href="index.html" class="nav-brand">
-            <span class="nav-logo">बबलू गारमेंट्स</span>
-            <span class="nav-tagline">कपड्यांचे विश्वसनीय ठिकाण</span>
+
+            <span class="nav-logo">
+                बबलू गारमेंट्स
+            </span>
+
+            <span class="nav-tagline">
+                कपड्यांचे विश्वसनीय ठिकाण
+            </span>
+
         </a>
+
 
         <ul class="nav-links">
 
             <li>
-                <a href="index.html">Home</a>
+                <a href="index.html">
+                    Home
+                </a>
             </li>
 
             <li>
-                <a href="new-stock.html">नवीन स्टॉक</a>
+                <a href="new-stock.html">
+                    नवीन स्टॉक
+                </a>
             </li>
 
             <li>
-                <a href="collection.html">आमचा संग्रह</a>
+                <a href="collection.html">
+                    आमचा संग्रह
+                </a>
             </li>
 
             <li>
-                <a href="shop-gallery.html">आमच्या दुकानाची झलक</a>
+                <a href="shop-gallery.html">
+                    आमच्या दुकानाची झलक
+                </a>
             </li>
 
             <li>
-                <a href="reviews.html">ग्राहकांचे अभिप्राय</a>
+                <a href="reviews.html">
+                    ग्राहकांचे अभिप्राय
+                </a>
             </li>
 
             <li>
-                <a href="about.html">आमच्याबद्दल</a>
+                <a href="about.html">
+                    आमच्याबद्दल
+                </a>
             </li>
 
             <li>
-                <a href="contact.html">संपर्क</a>
+                <a href="contact.html">
+                    संपर्क
+                </a>
             </li>
 
         </ul>
 
+
         <div class="nav-icons">
 
-            <a href="new-stock.html"
-               class="icon-btn"
-               title="Notifications">
-
+            <a
+                href="new-stock.html"
+                class="icon-btn"
+                title="Notifications"
+            >
                 🔔
-
                 <span class="notification-badge">
                     1
                 </span>
-
             </a>
 
-            <a href="contact.html"
-               class="icon-btn"
-               title="WhatsApp">
 
+            <a
+                href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे."
+                target="_blank"
+                rel="noopener"
+                class="icon-btn"
+                title="WhatsApp"
+            >
                 💬
-
             </a>
+
 
             <div class="hamburger">
 
@@ -101,11 +135,13 @@
 
 
     <!-- ============================= -->
-    <!-- Page Header -->
+    <!-- PAGE HEADER -->
     <!-- ============================= -->
 
-    <section class="section-padding"
-             style="background-color: var(--color-white); padding-bottom: 2rem;">
+    <section
+        class="section-padding"
+        style="background-color: var(--color-white); padding-bottom: 2rem;"
+    >
 
         <div class="container">
 
@@ -127,21 +163,32 @@
 
 
     <!-- ============================= -->
-    <!-- Shop Gallery -->
+    <!-- SHOP GALLERY -->
     <!-- ============================= -->
 
-    <section class="section-padding bg-light"
-             style="padding-top: 2rem;">
+    <section
+        class="section-padding bg-light"
+        style="padding-top: 2rem;"
+    >
 
         <div class="container">
 
-            <div class="masonry-grid"
-                 id="shop-gallery-grid">
+            <div
+                class="masonry-grid"
+                id="shop-gallery-grid"
+            >
 
-                <!--
-                    Javascript will render
-                    shop images here.
-                -->
+                <div
+                    style="
+                        width:100%;
+                        text-align:center;
+                        padding:50px 20px;
+                        font-size:18px;
+                    "
+                    id="gallery-loading"
+                >
+                    Gallery loading...
+                </div>
 
             </div>
 
@@ -151,34 +198,58 @@
 
 
     <!-- ============================= -->
-    <!-- Lightbox -->
+    <!-- LIGHTBOX -->
     <!-- ============================= -->
 
-    <div class="lightbox"
-         id="lightbox">
+    <div
+        class="lightbox"
+        id="lightbox"
+    >
 
-        <button class="lightbox-prev">
+        <button
+            class="lightbox-prev"
+            type="button"
+            id="gallery-prev"
+            aria-label="Previous image"
+        >
             ‹
         </button>
 
-        <button class="lightbox-next">
+
+        <button
+            class="lightbox-next"
+            type="button"
+            id="gallery-next"
+            aria-label="Next image"
+        >
             ›
         </button>
 
+
         <div class="lightbox-content">
 
-            <button class="lightbox-close">
+            <button
+                class="lightbox-close"
+                type="button"
+                id="gallery-close"
+                aria-label="Close"
+            >
                 &times;
             </button>
 
-            <img src=""
-                 alt="Gallery Image"
-                 class="lightbox-img"
-                 id="lightbox-img">
 
-            <div class="lightbox-caption"
-                 id="lightbox-caption">
-            </div>
+            <img
+                src=""
+                alt="Gallery Image"
+                class="lightbox-img"
+                id="lightbox-img"
+            >
+
+
+            <div
+                class="lightbox-caption"
+                id="lightbox-caption"
+            ></div>
 
         </div>
 
@@ -186,7 +257,7 @@
 
 
     <!-- ============================= -->
-    <!-- Footer -->
+    <!-- FOOTER -->
     <!-- ============================= -->
 
     <footer class="footer">
@@ -202,24 +273,29 @@
                     बबलू गारमेंट्स
                 </div>
 
-                <div class="nav-tagline"
-                     style="margin-bottom: 1.5rem;">
 
+                <div
+                    class="nav-tagline"
+                    style="margin-bottom: 1.5rem;"
+                >
                     कपड्यांचे विश्वसनीय ठिकाण
-
                 </div>
 
-                <p style="opacity: 0.8; line-height: 1.6;">
 
+                <p
+                    style="opacity: 0.8; line-height: 1.6;"
+                >
                     लहानग्यांसाठी आकर्षक,
                     आरामदायी आणि ट्रेंडी कपड्यांचे
                     खास कलेक्शन.
-
                 </p>
+
 
                 <div style="margin-top: 1rem;">
 
-                    <strong style="color: var(--color-gold);">
+                    <strong
+                        style="color: var(--color-gold);"
+                    >
                         मालक:
                     </strong>
 
@@ -227,7 +303,9 @@
 
                     <br>
 
-                    <strong style="color: var(--color-gold);">
+                    <strong
+                        style="color: var(--color-gold);"
+                    >
                         फोन:
                     </strong>
 
@@ -235,7 +313,9 @@
 
                     <br>
 
-                    <strong style="color: var(--color-gold);">
+                    <strong
+                        style="color: var(--color-gold);"
+                    >
                         पत्ता:
                     </strong>
 
@@ -331,22 +411,29 @@
 
                 <div class="social-icons">
 
-                    <a href="#"
-                       class="social-icon">
+                    <a
+                        href="#"
+                        class="social-icon"
+                    >
                         IG
                     </a>
 
-                    <a href="#"
-                       class="social-icon">
+
+                    <a
+                        href="#"
+                        class="social-icon"
+                    >
                         FB
                     </a>
 
-                    <a href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे."
-                       target="_blank"
-                       class="social-icon">
 
+                    <a
+                        href="https://wa.me/919022103118?text=नमस्कार,%20मला%20बबलू%20गारमेंट्सच्या%20कलेक्शनबद्दल%20माहिती%20हवी%20आहे."
+                        target="_blank"
+                        rel="noopener"
+                        class="social-icon"
+                    >
                         WA
-
                     </a>
 
                 </div>
@@ -369,18 +456,502 @@
 
 
     <!-- ================================= -->
-    <!-- SUPABASE LIBRARY -->
-    <!-- IMPORTANT: BEFORE script.js -->
+    <!-- SHOP GALLERY SUPABASE SCRIPT -->
     <!-- ================================= -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+
+        (function () {
+
+            const SUPABASE_URL =
+                "https://hevkxlppmhfqyeqpywkj.supabase.co";
+
+            const SUPABASE_PUBLISHABLE_KEY =
+                "sb_publishable_bEblWNgn7vXCMgjJ2nJLCA_vdXVaeKt";
 
 
-    <!-- ================================= -->
-    <!-- MAIN WEBSITE JAVASCRIPT -->
-    <!-- ================================= -->
+            const supabaseGalleryClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_PUBLISHABLE_KEY
+                );
 
-    <script src="js/script.js"></script>
+
+            const container =
+                document.getElementById(
+                    "shop-gallery-grid"
+                );
+
+
+            const lightbox =
+                document.getElementById(
+                    "lightbox"
+                );
+
+
+            const lightboxImg =
+                document.getElementById(
+                    "lightbox-img"
+                );
+
+
+            const lightboxCaption =
+                document.getElementById(
+                    "lightbox-caption"
+                );
+
+
+            const closeButton =
+                document.getElementById(
+                    "gallery-close"
+                );
+
+
+            const prevButton =
+                document.getElementById(
+                    "gallery-prev"
+                );
+
+
+            const nextButton =
+                document.getElementById(
+                    "gallery-next"
+                );
+
+
+            let images = [];
+
+            let currentIndex = 0;
+
+
+            // ==================================
+            // ESCAPE HTML
+            // ==================================
+
+            function escapeHTML(value) {
+
+                return String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+
+            }
+
+
+            // ==================================
+            // LOAD GALLERY
+            // ==================================
+
+            async function loadGallery() {
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseGalleryClient
+                            .from("gallery")
+                            .select(
+                                "id,title,image_url,created_at"
+                            )
+                            .eq(
+                                "is_active",
+                                true
+                            )
+                            .order(
+                                "created_at",
+                                {
+                                    ascending: false
+                                }
+                            );
+
+
+                    if (error) {
+
+                        console.error(
+                            "❌ Gallery load error:",
+                            error
+                        );
+
+
+                        container.innerHTML = `
+                            <div
+                                style="
+                                    width:100%;
+                                    text-align:center;
+                                    padding:50px 20px;
+                                    color:#777;
+                                "
+                            >
+                                गॅलरी लोड करण्यात अडचण आली.
+                            </div>
+                        `;
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !data ||
+                        data.length === 0
+                    ) {
+
+                        container.innerHTML = `
+                            <div
+                                style="
+                                    width:100%;
+                                    text-align:center;
+                                    padding:50px 20px;
+                                    color:#777;
+                                "
+                            >
+                                सध्या गॅलरीमध्ये कोणतेही फोटो उपलब्ध नाहीत.
+                            </div>
+                        `;
+
+                        return;
+
+                    }
+
+
+                    images = data.map(
+                        item => ({
+
+                            id:
+                                item.id,
+
+                            title:
+                                item.title ||
+                                "बबलू गारमेंट्स",
+
+                            url:
+                                item.image_url
+
+                        })
+                    );
+
+
+                    container.innerHTML = "";
+
+
+                    images.forEach(
+                        (item, index) => {
+
+                            const galleryItem =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            galleryItem.className =
+                                "masonry-item";
+
+
+                            galleryItem.innerHTML = `
+
+                                <img
+                                    src="${escapeHTML(item.url)}"
+                                    alt="${escapeHTML(item.title)}"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <div class="masonry-overlay">
+
+                                    <span>
+                                        ${escapeHTML(item.title)}
+                                    </span>
+
+                                </div>
+
+                            `;
+
+
+                            galleryItem.addEventListener(
+                                "click",
+                                function () {
+
+                                    openLightbox(
+                                        index
+                                    );
+
+                                }
+                            );
+
+
+                            container.appendChild(
+                                galleryItem
+                            );
+
+                        }
+                    );
+
+
+                    console.log(
+                        "✅ Gallery loaded:",
+                        images.length
+                    );
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "❌ Unexpected gallery error:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            // ==================================
+            // OPEN LIGHTBOX
+            // ==================================
+
+            function openLightbox(index) {
+
+                if (
+                    !images.length
+                ) {
+                    return;
+                }
+
+
+                currentIndex =
+                    index;
+
+
+                updateLightbox();
+
+
+                lightbox.classList.add(
+                    "active"
+                );
+
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+
+
+            // ==================================
+            // UPDATE LIGHTBOX
+            // ==================================
+
+            function updateLightbox() {
+
+                const item =
+                    images[currentIndex];
+
+
+                if (!item) {
+                    return;
+                }
+
+
+                lightboxImg.src =
+                    item.url;
+
+
+                lightboxImg.alt =
+                    item.title;
+
+
+                lightboxCaption.textContent =
+                    item.title;
+
+            }
+
+
+            // ==================================
+            // CLOSE
+            // ==================================
+
+            function closeLightbox() {
+
+                lightbox.classList.remove(
+                    "active"
+                );
+
+
+                lightboxImg.src = "";
+
+
+                document.body.style.overflow =
+                    "";
+
+            }
+
+
+            // ==================================
+            // NEXT
+            // ==================================
+
+            function nextImage() {
+
+                if (
+                    !images.length
+                ) {
+                    return;
+                }
+
+
+                currentIndex =
+                    (
+                        currentIndex + 1
+                    ) %
+                    images.length;
+
+
+                updateLightbox();
+
+            }
+
+
+            // ==================================
+            // PREVIOUS
+            // ==================================
+
+            function previousImage() {
+
+                if (
+                    !images.length
+                ) {
+                    return;
+                }
+
+
+                currentIndex =
+                    (
+                        currentIndex -
+                        1 +
+                        images.length
+                    ) %
+                    images.length;
+
+
+                updateLightbox();
+
+            }
+
+
+            // ==================================
+            // BUTTONS
+            // ==================================
+
+            closeButton.addEventListener(
+                "click",
+                closeLightbox
+            );
+
+
+            nextButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    nextImage();
+
+                }
+            );
+
+
+            prevButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    previousImage();
+
+                }
+            );
+
+
+            // ==================================
+            // CLICK OUTSIDE
+            // ==================================
+
+            lightbox.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target === lightbox
+                    ) {
+
+                        closeLightbox();
+
+                    }
+
+                }
+            );
+
+
+            // ==================================
+            // KEYBOARD
+            // ==================================
+
+            document.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        !lightbox.classList.contains(
+                            "active"
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    if (
+                        event.key === "Escape"
+                    ) {
+
+                        closeLightbox();
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        nextImage();
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        previousImage();
+
+                    }
+
+                }
+            );
+
+
+            // ==================================
+            // START
+            // ==================================
+
+            loadGallery();
+
+        })();
+
+    </script>
 
 
 </body>
