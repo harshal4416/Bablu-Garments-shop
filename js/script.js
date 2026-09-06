@@ -1,815 +1,594 @@
 /**
-
-* ============================================
-* BABLU GARMENTS - MAIN JAVASCRIPT
-* ============================================
-  */
+ * ============================================
+ * BABLU GARMENTS - MAIN JAVASCRIPT
+ * ============================================
+ */
 
 /* ============================================
-SUPABASE CONFIGURATION
+   SUPABASE CONFIGURATION
 ============================================ */
 
 const SUPABASE_URL =
-"https://hevkxlppmhfqyeqpywkj.supabase.co";
+    "https://hevkxlppmhfqyeqpywkj.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_bEblWNgn7vXCMgjJ2nJLCA_vdXVaeKt";
+    "sb_publishable_bEblWNgn7vXCMgjJ2nJLCA_vdXVaeKt";
 
 let supabaseClient = null;
 
+
 /* ============================================
-INITIALIZE SUPABASE
+   INITIALIZE SUPABASE
 ============================================ */
 
 function initializeSupabase() {
+    if (
+        window.supabase &&
+        typeof window.supabase.createClient === "function"
+    ) {
+        supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
 
-```
-if (
-    window.supabase &&
-    typeof window.supabase.createClient === "function"
-) {
+        console.log("✅ Supabase connected");
+        return true;
+    }
 
-    supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
-
-    console.log("✅ Supabase connected");
-
-    return true;
-}
-
-console.error("❌ Supabase library not loaded.");
-
-return false;
-```
-
+    console.error("❌ Supabase library not loaded.");
+    return false;
 }
 
 initializeSupabase();
 
+
 /* ============================================
-CATEGORY NAMES
+   CATEGORY NAMES
 ============================================ */
 
 const categoryNames = {
-
-```
-boys: "मुलांचे कपडे",
-
-girls: "मुलींचे कपडे",
-
-baby: "बेबी वेअर",
-
-party: "पार्टी वेअर",
-
-casual: "कॅज्युअल वेअर"
-```
-
+    boys: "मुलांचे कपडे",
+    girls: "मुलींचे कपडे",
+    baby: "बेबी वेअर",
+    party: "पार्टी वेअर",
+    casual: "कॅज्युअल वेअर"
 };
 
+
 /* ============================================
-FALLBACK STOCK
+   FALLBACK STOCK
 ============================================ */
 
 const fallbackStock = [
-
-```
-{
-    image:
-        "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=600&auto=format&fit=crop",
-
-    name:
-        "समर कलेक्शन टी-शर्ट्स",
-
-    description:
-        "आरामदायी कॉटन फॅब्रिक, आकर्षक डिझाईन्स.",
-
-    category:
-        "boys"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=600&auto=format&fit=crop",
-
-    name:
-        "फ्लॉवर डिझाईन फ्रॉक",
-
-    description:
-        "सुंदर रंगांमध्ये उपलब्ध नवीन फ्रॉक्स.",
-
-    category:
-        "girls"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop",
-
-    name:
-        "क्यूट कॉटन रोम्पर्स",
-
-    description:
-        "लहानग्यांच्या नाजूक त्वचेसाठी उत्तम.",
-
-    category:
-        "baby"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1604144365773-f935398d5a44?q=80&w=600&auto=format&fit=crop",
-
-    name:
-        "पार्टी वेअर कलेक्शन",
-
-    description:
-        "लग्नसराईसाठी खास डिझायनर कपडे.",
-
-    category:
-        "party"
-}
-```
-
+    {
+        image:
+            "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=600&auto=format&fit=crop",
+        name: "समर कलेक्शन टी-शर्ट्स",
+        description: "आरामदायी कॉटन फॅब्रिक, आकर्षक डिझाईन्स.",
+        category: "boys"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=600&auto=format&fit=crop",
+        name: "फ्लॉवर डिझाईन फ्रॉक",
+        description: "सुंदर रंगांमध्ये उपलब्ध नवीन फ्रॉक्स.",
+        category: "girls"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=600&auto=format&fit=crop",
+        name: "क्यूट कॉटन रोम्पर्स",
+        description: "लहानग्यांच्या नाजूक त्वचेसाठी उत्तम.",
+        category: "baby"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1604144365773-f935398d5a44?q=80&w=600&auto=format&fit=crop",
+        name: "पार्टी वेअर कलेक्शन",
+        description: "लग्नसराईसाठी खास डिझायनर कपडे.",
+        category: "party"
+    }
 ];
 
+
 /* ============================================
-SHOP GALLERY DATA
+   SHOP GALLERY DATA
 ============================================ */
 
 const shopImages = [
-
-```
-{
-    image:
-        "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800&auto=format&fit=crop",
-
-    title:
-        "बबलू गारमेंट्स - दुकानाची बाहेरील झलक"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800&auto=format&fit=crop",
-
-    title:
-        "आमच्या दुकानाची आतील झलक"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?q=80&w=800&auto=format&fit=crop",
-
-    title:
-        "सुंदर कपड्यांचे कलेक्शन"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1489987707023-afc827101036?q=80&w=800&auto=format&fit=crop",
-
-    title:
-        "मुलांसाठी नवीन व्हरायटी"
-},
-
-{
-    image:
-        "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=800&auto=format&fit=crop",
-
-    title:
-        "उत्तम दर्जाचे कपडे"
-}
-```
-
+    {
+        image:
+            "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800&auto=format&fit=crop",
+        title: "बबलू गारमेंट्स - दुकानाची बाहेरील झलक"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800&auto=format&fit=crop",
+        title: "आमच्या दुकानाची आतील झलक"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?q=80&w=800&auto=format&fit=crop",
+        title: "सुंदर कपड्यांचे कलेक्शन"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1489987707023-afc827101036?q=80&w=800&auto=format&fit=crop",
+        title: "मुलांसाठी नवीन व्हरायटी"
+    },
+    {
+        image:
+            "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=800&auto=format&fit=crop",
+        title: "उत्तम दर्जाचे कपडे"
+    }
 ];
 
+
 /* ============================================
-GET STOCK FROM SUPABASE
+   GET STOCK FROM SUPABASE
 ============================================ */
 
 async function getNewStock() {
-
-```
-if (!supabaseClient) {
-
-    console.error(
-        "❌ Supabase client unavailable"
-    );
-
-    return [];
-}
-
-try {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("stock")
-        .select(
-            "id,name,category,description,image_url,is_active,created_at"
-        )
-        .eq(
-            "is_active",
-            true
-        )
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
-
-    if (error) {
-
-        console.error(
-            "❌ Stock fetch error:",
-            error
-        );
-
+    if (!supabaseClient) {
+        console.error("❌ Supabase client unavailable");
         return [];
     }
 
-    console.log(
-        "✅ Live stock loaded:",
-        data
-    );
+    try {
+        const { data, error } = await supabaseClient
+            .from("stock")
+            .select(
+                "id,name,category,description,image_url,is_active,created_at"
+            )
+            .eq("is_active", true)
+            .order("created_at", {
+                ascending: false
+            });
 
-    return data || [];
+        if (error) {
+            console.error("❌ Stock fetch error:", error);
+            return [];
+        }
 
-} catch (error) {
+        console.log("✅ Live stock loaded:", data);
 
-    console.error(
-        "❌ Unexpected stock error:",
-        error
-    );
-
-    return [];
+        return data || [];
+    } catch (error) {
+        console.error("❌ Unexpected stock error:", error);
+        return [];
+    }
 }
-```
 
-}
 
 /* ============================================
-CREATE STOCK CARD
+   CREATE STOCK CARD
 ============================================ */
 
 function createStockCard(item) {
+    const card = document.createElement("div");
 
-```
-const card =
-    document.createElement("div");
+    card.className = "item-card filter-item";
 
-card.className =
-    "item-card filter-item";
+    card.setAttribute(
+        "data-category",
+        item.category || ""
+    );
 
-card.setAttribute(
-    "data-category",
-    item.category || ""
-);
+    const categoryName =
+        categoryNames[item.category] ||
+        item.category ||
+        "नवीन कलेक्शन";
 
-const categoryName =
-    categoryNames[item.category] ||
-    item.category ||
-    "नवीन कलेक्शन";
+    const image =
+        item.image_url ||
+        item.image ||
+        "";
 
-const image =
-    item.image_url ||
-    item.image ||
-    "";
+    const name =
+        item.name ||
+        item.title ||
+        "नवीन स्टॉक";
 
-const name =
-    item.name ||
-    item.title ||
-    "नवीन स्टॉक";
+    const description =
+        item.description ||
+        "बबलू गारमेंट्समधील नवीन कलेक्शन.";
 
-const description =
-    item.description ||
-    "बबलू गारमेंट्समधील नवीन कलेक्शन.";
+    card.innerHTML = `
+        <span class="badge-new">
+            NEW
+        </span>
 
-card.innerHTML = `
-
-    <span class="badge-new">
-        NEW
-    </span>
-
-    <div class="item-img-wrap">
-
-        <img
-            src="${image}"
-            alt="${name}"
-            loading="lazy"
-        >
-
-    </div>
-
-    <div class="item-info">
-
-        <div class="item-cat">
-            ${categoryName}
+        <div class="item-img-wrap">
+            <img
+                src="${image}"
+                alt="${name}"
+                loading="lazy"
+            >
         </div>
 
-        <h4 class="item-title">
-            ${name}
-        </h4>
+        <div class="item-info">
 
-        <p style="
-            color:#666;
-            font-size:0.9rem;
-            line-height:1.6;
-        ">
-            ${description}
-        </p>
+            <div class="item-cat">
+                ${categoryName}
+            </div>
 
-    </div>
-`;
+            <h4 class="item-title">
+                ${name}
+            </h4>
 
-return card;
-```
+            <p style="
+                color:#666;
+                font-size:0.9rem;
+                line-height:1.6;
+            ">
+                ${description}
+            </p>
 
+        </div>
+    `;
+
+    return card;
 }
 
+
 /* ============================================
-RENDER NEW STOCK PAGE
+   RENDER NEW STOCK PAGE
 ============================================ */
 
 async function renderNewStock() {
+    const stockContainer =
+        document.getElementById("stock-grid");
 
-```
-const stockContainer =
-    document.getElementById(
-        "stock-grid"
-    );
+    if (!stockContainer) {
+        return;
+    }
 
-if (!stockContainer) {
-    return;
-}
+    stockContainer.innerHTML = `
+        <div style="
+            width:100%;
+            text-align:center;
+            padding:50px 20px;
+            font-size:18px;
+        ">
+            नवीन स्टॉक लोड होत आहे...
+        </div>
+    `;
 
-stockContainer.innerHTML = `
+    const stock = await getNewStock();
 
-    <div style="
-        width:100%;
-        text-align:center;
-        padding:50px 20px;
-        font-size:18px;
-    ">
-        नवीन स्टॉक लोड होत आहे...
-    </div>
+    if (stock.length > 0) {
+        console.log("✅ Showing live Supabase stock");
 
-`;
+        stockContainer.innerHTML = "";
 
-const stock =
-    await getNewStock();
+        stock.forEach(item => {
+            const card = createStockCard(item);
+            stockContainer.appendChild(card);
+        });
 
-if (stock.length > 0) {
+        initLightbox(".item-card");
+        setupFiltering();
+
+        return;
+    }
 
     console.log(
-        "✅ Showing live Supabase stock"
+        "ℹ️ No live stock found. Showing fallback."
     );
 
     stockContainer.innerHTML = "";
 
-    stock.forEach(
-        item => {
+    fallbackStock.forEach(item => {
+        const card = createStockCard(item);
+        stockContainer.appendChild(card);
+    });
 
-            const card =
-                createStockCard(item);
-
-            stockContainer.appendChild(
-                card
-            );
-
-        }
-    );
-
-    initLightbox(
-        ".item-card"
-    );
-
+    initLightbox(".item-card");
     setupFiltering();
-
-    return;
 }
 
-console.log(
-    "ℹ️ No live stock found. Showing fallback."
-);
-
-stockContainer.innerHTML = "";
-
-fallbackStock.forEach(
-    item => {
-
-        const card =
-            createStockCard(item);
-
-        stockContainer.appendChild(
-            card
-        );
-
-    }
-);
-
-initLightbox(
-    ".item-card"
-);
-
-setupFiltering();
-```
-
-}
 
 /* ============================================
-RENDER HOMEPAGE STOCK
+   RENDER HOMEPAGE STOCK
 ============================================ */
 
 async function renderHomePreview() {
+    const container =
+        document.getElementById("home-stock-preview");
 
-```
-const container =
-    document.getElementById(
-        "home-stock-preview"
-    );
+    if (!container) {
+        return;
+    }
 
-if (!container) {
-    return;
+    container.innerHTML = `
+        <div style="
+            width:100%;
+            text-align:center;
+            padding:30px;
+        ">
+            नवीन स्टॉक लोड होत आहे...
+        </div>
+    `;
+
+    const stock = await getNewStock();
+
+    let displayStock;
+
+    if (stock.length > 0) {
+        console.log("✅ Homepage showing live stock");
+        displayStock = stock.slice(0, 4);
+    } else {
+        console.log(
+            "ℹ️ Homepage showing fallback stock"
+        );
+        displayStock = fallbackStock;
+    }
+
+    container.innerHTML = "";
+
+    displayStock
+        .slice(0, 4)
+        .forEach(item => {
+            const card = createStockCard(item);
+            container.appendChild(card);
+        });
 }
 
-container.innerHTML = `
-
-    <div style="
-        width:100%;
-        text-align:center;
-        padding:30px;
-    ">
-        नवीन स्टॉक लोड होत आहे...
-    </div>
-
-`;
-
-const stock =
-    await getNewStock();
-
-let displayStock;
-
-if (stock.length > 0) {
-
-    console.log(
-        "✅ Homepage showing live stock"
-    );
-
-    displayStock =
-        stock.slice(0, 4);
-
-} else {
-
-    console.log(
-        "ℹ️ Homepage showing fallback stock"
-    );
-
-    displayStock =
-        fallbackStock;
-}
-
-container.innerHTML = "";
-
-displayStock
-    .slice(0, 4)
-    .forEach(
-        item => {
-
-            const card =
-                createStockCard(item);
-
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-```
-
-}
 
 /* ============================================
-CUSTOMER REVIEWS
+   CUSTOMER REVIEWS
 ============================================ */
 
 /*
+   Customer review flow:
 
-* Homepage reviews are loaded from Supabase.
-*
-* IMPORTANT:
-* Only reviews with approved = true
-* are displayed publicly.
-*
-* Admin:
-* approved = true  -> SHOW
-* approved = false -> HIDE
-* deleted          -> REMOVE
-  */
+   Customer submits review
+          ↓
+   approved = false
+          ↓
+   Admin approves
+          ↓
+   approved = true
+          ↓
+   Homepage displays review
+
+   Unapprove:
+   approved = false → review hidden
+
+   Delete:
+   review removed completely
+*/
+
 
 /* ============================================
-CREATE REVIEW CARD
+   CREATE REVIEW CARD
 ============================================ */
 
 function createReviewCard(review) {
+    const card =
+        document.createElement("div");
 
-```
-const card =
-    document.createElement("div");
+    card.className = "review-card";
 
-card.className =
-    "review-card";
+    const quote =
+        document.createElement("div");
 
+    quote.className = "review-quote-icon";
+    quote.textContent = "“";
 
-const quote =
-    document.createElement("div");
+    const feedback =
+        document.createElement("p");
 
-quote.className =
-    "review-quote-icon";
+    feedback.style.cssText = `
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--color-charcoal);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    `;
 
-quote.textContent =
-    "“";
+    feedback.textContent =
+        review.feedback || "";
 
+    const name =
+        document.createElement("h5");
 
-const feedback =
-    document.createElement("p");
+    name.style.cssText = `
+        font-size: 1.1rem;
+        color: var(--color-maroon);
+    `;
 
-feedback.style.cssText = `
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--color-charcoal);
-    margin-bottom: 1.5rem;
-    font-style: italic;
-`;
+    name.textContent =
+        review.name || "ग्राहक";
 
-feedback.textContent =
-    review.feedback ||
-    "";
+    const date =
+        document.createElement("span");
 
+    date.style.cssText = `
+        font-size: 0.9rem;
+        color: var(--color-gray);
+    `;
 
-const name =
-    document.createElement("h5");
+    if (review.created_at) {
+        const reviewDate =
+            new Date(review.created_at);
 
-name.style.cssText = `
-    font-size: 1.1rem;
-    color: var(--color-maroon);
-`;
+        date.textContent =
+            reviewDate.toLocaleDateString(
+                "mr-IN",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+    }
 
-name.textContent =
-    review.name ||
-    "ग्राहक";
+    card.appendChild(quote);
+    card.appendChild(feedback);
+    card.appendChild(name);
+    card.appendChild(date);
 
-
-const date =
-    document.createElement("span");
-
-date.style.cssText = `
-    font-size: 0.9rem;
-    color: var(--color-gray);
-`;
-
-
-if (review.created_at) {
-
-    const reviewDate =
-        new Date(
-            review.created_at
-        );
-
-    date.textContent =
-        reviewDate.toLocaleDateString(
-            "mr-IN",
-            {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
+    return card;
 }
 
-
-card.appendChild(
-    quote
-);
-
-card.appendChild(
-    feedback
-);
-
-card.appendChild(
-    name
-);
-
-card.appendChild(
-    date
-);
-
-
-return card;
-```
-
-}
 
 /* ============================================
-GET APPROVED REVIEWS
+   GET APPROVED REVIEWS
 ============================================ */
 
 async function getApprovedReviews() {
-
-```
-if (!supabaseClient) {
-
-    console.error(
-        "❌ Supabase client unavailable for reviews"
-    );
-
-    return [];
-}
-
-
-try {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("reviews")
-        .select(
-            "id,name,feedback,created_at"
-        )
-        .eq(
-            "approved",
-            true
-        )
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
-
-
-    if (error) {
-
+    if (!supabaseClient) {
         console.error(
-            "❌ Approved reviews fetch error:",
-            error
+            "❌ Supabase client unavailable for reviews"
         );
 
         return [];
     }
 
+    try {
+        const { data, error } =
+            await supabaseClient
+                .from("reviews")
+                .select(
+                    "id,name,feedback,created_at"
+                )
+                .eq("approved", true)
+                .order("created_at", {
+                    ascending: false
+                });
 
-    console.log(
-        "✅ Approved reviews loaded:",
-        data
-    );
+        if (error) {
+            console.error(
+                "❌ Approved reviews fetch error:",
+                error
+            );
 
+            return [];
+        }
 
-    return data || [];
+        console.log(
+            "✅ Approved reviews loaded:",
+            data
+        );
 
+        return data || [];
+    } catch (error) {
+        console.error(
+            "❌ Unexpected reviews error:",
+            error
+        );
 
-} catch (error) {
-
-    console.error(
-        "❌ Unexpected reviews error:",
-        error
-    );
-
-    return [];
+        return [];
+    }
 }
-```
 
-}
 
 /* ============================================
-RENDER HOMEPAGE REVIEWS
+   RENDER HOMEPAGE REVIEWS
 ============================================ */
 
 async function renderHomeReviews() {
 
-```
-const container =
-    document.getElementById(
-        "home-reviews-container"
-    );
+    /*
+     * IMPORTANT:
+     * index.html must contain:
+     *
+     * id="home-reviews-grid"
+     */
 
-if (!container) {
+    const container =
+        document.getElementById(
+            "home-reviews-grid"
+        );
 
-    console.log(
-        "ℹ️ Homepage reviews container not found"
-    );
+    if (!container) {
+        console.log(
+            "ℹ️ Homepage reviews container not found"
+        );
 
-    return;
-}
-
-
-container.innerHTML = `
-
-    <p style="
-        text-align:center;
-        grid-column:1/-1;
-    ">
-        अभिप्राय लोड होत आहेत...
-    </p>
-
-`;
-
-
-const reviews =
-    await getApprovedReviews();
-
-
-if (
-    !reviews ||
-    reviews.length === 0
-) {
+        return;
+    }
 
     container.innerHTML = `
-
         <p style="
             text-align:center;
             grid-column:1/-1;
+            padding:30px;
         ">
-            अजून कोणतेही मंजूर अभिप्राय उपलब्ध नाहीत.
+            अभिप्राय लोड होत आहेत...
         </p>
-
     `;
 
-    return;
-}
+    const reviews =
+        await getApprovedReviews();
 
+    if (
+        !reviews ||
+        reviews.length === 0
+    ) {
+        container.innerHTML = `
+            <p style="
+                text-align:center;
+                grid-column:1/-1;
+                padding:30px;
+            ">
+                अजून कोणतेही मंजूर अभिप्राय उपलब्ध नाहीत.
+            </p>
+        `;
 
-container.innerHTML = "";
+        return;
+    }
 
+    container.innerHTML = "";
 
-/*
- * Homepage shows only latest 3 approved reviews.
- */
+    /*
+     * Homepage shows latest 3 approved reviews.
+     */
 
-reviews
-    .slice(0, 3)
-    .forEach(
-        review => {
-
+    reviews
+        .slice(0, 3)
+        .forEach(review => {
             const card =
-                createReviewCard(
-                    review
-                );
+                createReviewCard(review);
 
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-```
-
+            container.appendChild(card);
+        });
 }
+
 
 /* ============================================
-SHOP GALLERY
+   SHOP GALLERY
 ============================================ */
 
 function renderShopGallery() {
+    const container =
+        document.getElementById(
+            "shop-gallery-grid"
+        );
 
-```
-const container =
-    document.getElementById(
-        "shop-gallery-grid"
-    );
+    if (!container) {
+        console.log(
+            "ℹ️ Shop gallery page not detected"
+        );
 
-if (!container) {
+        return;
+    }
 
     console.log(
-        "ℹ️ Shop gallery page not detected"
+        "🖼️ Rendering shop gallery..."
     );
 
-    return;
-}
+    container.innerHTML = "";
 
-console.log(
-    "🖼️ Rendering shop gallery..."
-);
-
-container.innerHTML = "";
-
-shopImages.forEach(
-    item => {
-
+    shopImages.forEach(item => {
         const galleryItem =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
         galleryItem.className =
             "masonry-item";
 
         galleryItem.innerHTML = `
-
             <img
                 src="${item.image}"
                 alt="${item.title}"
@@ -817,109 +596,85 @@ shopImages.forEach(
             >
 
             <div class="masonry-overlay">
-
                 <span>
                     ${item.title}
                 </span>
-
             </div>
-
         `;
 
         container.appendChild(
             galleryItem
         );
+    });
 
-    }
-);
+    console.log(
+        `✅ Shop gallery rendered: ${shopImages.length} images`
+    );
 
-console.log(
-    `✅ Shop gallery rendered: ${shopImages.length} images`
-);
-
-initLightbox(
-    ".masonry-item"
-);
-```
-
+    initLightbox(".masonry-item");
 }
 
+
 /* ============================================
-LIGHTBOX
+   LIGHTBOX
 ============================================ */
 
 let galleryImages = [];
-
 let currentImageIndex = 0;
 
 function initLightbox(selector) {
 
-```
-const lightbox =
-    document.getElementById(
-        "lightbox"
-    );
+    const lightbox =
+        document.getElementById(
+            "lightbox"
+        );
 
-const lightboxImg =
-    document.getElementById(
-        "lightbox-img"
-    );
+    const lightboxImg =
+        document.getElementById(
+            "lightbox-img"
+        );
 
-const caption =
-    document.getElementById(
-        "lightbox-caption"
-    );
+    const caption =
+        document.getElementById(
+            "lightbox-caption"
+        );
 
-if (
-    !lightbox ||
-    !lightboxImg
-) {
+    if (
+        !lightbox ||
+        !lightboxImg
+    ) {
+        return;
+    }
 
-    return;
-}
+    const items =
+        document.querySelectorAll(
+            selector
+        );
 
+    if (items.length === 0) {
+        return;
+    }
 
-const items =
-    document.querySelectorAll(
-        selector
-    );
+    galleryImages = [];
 
-
-if (
-    items.length === 0
-) {
-
-    return;
-}
-
-
-galleryImages = [];
-
-
-items.forEach(
-    item => {
+    items.forEach(item => {
 
         const img =
-            item.querySelector(
-                "img"
-            );
+            item.querySelector("img");
 
         if (!img) {
             return;
         }
-
 
         const title =
             item.querySelector(
                 ".item-title"
             );
 
-
         const overlay =
             item.querySelector(
                 ".masonry-overlay span"
             );
-
 
         const itemCaption =
             title
@@ -928,21 +683,13 @@ items.forEach(
                     ? overlay.textContent
                     : img.alt || "";
 
-
         const imageIndex =
             galleryImages.length;
 
-
         galleryImages.push({
-
-            src:
-                img.src,
-
-            caption:
-                itemCaption.trim()
-
+            src: img.src,
+            caption: itemCaption.trim()
         });
-
 
         item.onclick =
             function(event) {
@@ -954,406 +701,325 @@ items.forEach(
 
                 openLightbox();
             };
-
-    }
-);
+    });
 
 
-function openLightbox() {
+    function openLightbox() {
 
-    if (
-        !galleryImages.length
-    ) {
-
-        return;
-    }
-
-    updateLightbox();
-
-    lightbox.classList.add(
-        "active"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-}
-
-
-function closeLightbox() {
-
-    lightbox.classList.remove(
-        "active"
-    );
-
-    document.body.style.overflow =
-        "auto";
-}
-
-
-function updateLightbox() {
-
-    const item =
-        galleryImages[
-            currentImageIndex
-        ];
-
-    if (!item) {
-        return;
-    }
-
-    lightboxImg.src =
-        item.src;
-
-    if (caption) {
-
-        caption.textContent =
-            item.caption;
-
-    }
-}
-
-
-const close =
-    document.querySelector(
-        ".lightbox-close"
-    );
-
-const prev =
-    document.querySelector(
-        ".lightbox-prev"
-    );
-
-const next =
-    document.querySelector(
-        ".lightbox-next"
-    );
-
-
-if (close) {
-
-    close.onclick =
-        closeLightbox;
-
-}
-
-
-if (prev) {
-
-    prev.onclick =
-        function(event) {
-
-            event.stopPropagation();
-
-            currentImageIndex =
-                (
-                    currentImageIndex -
-                    1 +
-                    galleryImages.length
-                ) %
-                galleryImages.length;
-
-            updateLightbox();
-
-        };
-
-}
-
-
-if (next) {
-
-    next.onclick =
-        function(event) {
-
-            event.stopPropagation();
-
-            currentImageIndex =
-                (
-                    currentImageIndex +
-                    1
-                ) %
-                galleryImages.length;
-
-            updateLightbox();
-
-        };
-
-}
-
-
-lightbox.onclick =
-    function(event) {
-
-        if (
-            event.target === lightbox
-        ) {
-
-            closeLightbox();
-
-        }
-
-    };
-
-
-document.onkeydown =
-    function(event) {
-
-        if (
-            !lightbox.classList.contains(
-                "active"
-            )
-        ) {
-
+        if (!galleryImages.length) {
             return;
         }
 
+        updateLightbox();
 
-        if (
-            event.key === "Escape"
-        ) {
+        lightbox.classList.add("active");
 
-            closeLightbox();
+        document.body.style.overflow =
+            "hidden";
+    }
 
+
+    function closeLightbox() {
+
+        lightbox.classList.remove("active");
+
+        document.body.style.overflow =
+            "auto";
+    }
+
+
+    function updateLightbox() {
+
+        const item =
+            galleryImages[
+                currentImageIndex
+            ];
+
+        if (!item) {
+            return;
         }
 
+        lightboxImg.src =
+            item.src;
 
-        if (
-            event.key === "ArrowLeft"
-        ) {
-
-            currentImageIndex =
-                (
-                    currentImageIndex -
-                    1 +
-                    galleryImages.length
-                ) %
-                galleryImages.length;
-
-            updateLightbox();
-
+        if (caption) {
+            caption.textContent =
+                item.caption;
         }
+    }
 
 
-        if (
-            event.key === "ArrowRight"
-        ) {
+    const close =
+        document.querySelector(
+            ".lightbox-close"
+        );
 
-            currentImageIndex =
-                (
-                    currentImageIndex +
-                    1
-                ) %
-                galleryImages.length;
+    const prev =
+        document.querySelector(
+            ".lightbox-prev"
+        );
 
-            updateLightbox();
+    const next =
+        document.querySelector(
+            ".lightbox-next"
+        );
 
-        }
 
-    };
-```
+    if (close) {
+        close.onclick =
+            closeLightbox;
+    }
 
+
+    if (prev) {
+        prev.onclick =
+            function(event) {
+
+                event.stopPropagation();
+
+                currentImageIndex =
+                    (
+                        currentImageIndex -
+                        1 +
+                        galleryImages.length
+                    ) %
+                    galleryImages.length;
+
+                updateLightbox();
+            };
+    }
+
+
+    if (next) {
+        next.onclick =
+            function(event) {
+
+                event.stopPropagation();
+
+                currentImageIndex =
+                    (
+                        currentImageIndex +
+                        1
+                    ) %
+                    galleryImages.length;
+
+                updateLightbox();
+            };
+    }
+
+
+    lightbox.onclick =
+        function(event) {
+
+            if (
+                event.target === lightbox
+            ) {
+                closeLightbox();
+            }
+        };
+
+
+    document.onkeydown =
+        function(event) {
+
+            if (
+                !lightbox.classList.contains(
+                    "active"
+                )
+            ) {
+                return;
+            }
+
+            if (
+                event.key === "Escape"
+            ) {
+                closeLightbox();
+            }
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+                currentImageIndex =
+                    (
+                        currentImageIndex -
+                        1 +
+                        galleryImages.length
+                    ) %
+                    galleryImages.length;
+
+                updateLightbox();
+            }
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+                currentImageIndex =
+                    (
+                        currentImageIndex +
+                        1
+                    ) %
+                    galleryImages.length;
+
+                updateLightbox();
+            }
+        };
 }
 
+
 /* ============================================
-FILTER STOCK
+   FILTER STOCK
 ============================================ */
 
 function setupFiltering() {
 
-```
-const buttons =
-    document.querySelectorAll(
-        ".filter-btn"
-    );
+    const buttons =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
 
-if (!buttons.length) {
-    return;
-}
+    if (!buttons.length) {
+        return;
+    }
 
-
-buttons.forEach(
-    button => {
+    buttons.forEach(button => {
 
         button.onclick =
             function() {
 
-                buttons.forEach(
-                    btn => {
-
-                        btn.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
+                buttons.forEach(btn => {
+                    btn.classList.remove(
+                        "active"
+                    );
+                });
 
                 button.classList.add(
                     "active"
                 );
-
 
                 const filter =
                     button.getAttribute(
                         "data-filter"
                     );
 
-
                 const items =
                     document.querySelectorAll(
                         ".filter-item"
                     );
 
+                items.forEach(item => {
 
-                items.forEach(
-                    item => {
+                    const category =
+                        item.getAttribute(
+                            "data-category"
+                        );
 
-                        const category =
-                            item.getAttribute(
-                                "data-category"
-                            );
-
-
-                        if (
-                            filter === "all" ||
-                            filter === category
-                        ) {
-
-                            item.style.display =
-                                "";
-
-                        } else {
-
-                            item.style.display =
-                                "none";
-
-                        }
-
+                    if (
+                        filter === "all" ||
+                        filter === category
+                    ) {
+                        item.style.display =
+                            "";
+                    } else {
+                        item.style.display =
+                            "none";
                     }
-                );
-
+                });
             };
-
-    }
-);
-```
-
+    });
 }
 
+
 /* ============================================
-MOBILE MENU
+   MOBILE MENU
 ============================================ */
 
 function setupMobileMenu() {
 
-```
-const hamburger =
-    document.querySelector(
-        ".hamburger"
-    );
-
-const navLinks =
-    document.querySelector(
-        ".nav-links"
-    );
-
-if (
-    !hamburger ||
-    !navLinks
-) {
-
-    return;
-}
-
-
-hamburger.onclick =
-    function() {
-
-        navLinks.classList.toggle(
-            "active"
+    const hamburger =
+        document.querySelector(
+            ".hamburger"
         );
 
+    const navLinks =
+        document.querySelector(
+            ".nav-links"
+        );
 
-        const spans =
-            hamburger.querySelectorAll(
-                "span"
+    if (
+        !hamburger ||
+        !navLinks
+    ) {
+        return;
+    }
+
+    hamburger.onclick =
+        function() {
+
+            navLinks.classList.toggle(
+                "active"
             );
 
+            const spans =
+                hamburger.querySelectorAll(
+                    "span"
+                );
 
-        if (
-            navLinks.classList.contains(
-                "active"
-            )
-        ) {
+            if (
+                navLinks.classList.contains(
+                    "active"
+                )
+            ) {
 
-            if (spans[0]) {
+                if (spans[0]) {
+                    spans[0].style.transform =
+                        "rotate(45deg) translate(5px, 5px)";
+                }
 
-                spans[0].style.transform =
-                    "rotate(45deg) translate(5px, 5px)";
+                if (spans[1]) {
+                    spans[1].style.opacity =
+                        "0";
+                }
 
-            }
+                if (spans[2]) {
+                    spans[2].style.transform =
+                        "rotate(-45deg) translate(5px, -5px)";
+                }
 
-            if (spans[1]) {
+            } else {
 
-                spans[1].style.opacity =
-                    "0";
-
-            }
-
-            if (spans[2]) {
-
-                spans[2].style.transform =
-                    "rotate(-45deg) translate(5px, -5px)";
-
-            }
-
-        } else {
-
-            spans.forEach(
-                span => {
+                spans.forEach(span => {
 
                     span.style.transform =
                         "none";
 
                     span.style.opacity =
                         "1";
-
-                }
-            );
-
-        }
-
-    };
-```
-
+                });
+            }
+        };
 }
 
+
 /* ============================================
-ACTIVE NAV LINK
+   ACTIVE NAV LINK
 ============================================ */
 
 function setupActiveNav() {
 
-```
-const currentPath =
-    window.location.pathname
-        .split("/")
-        .pop();
+    const currentPath =
+        window.location.pathname
+            .split("/")
+            .pop();
 
+    const navItems =
+        document.querySelectorAll(
+            ".nav-links a"
+        );
 
-const navItems =
-    document.querySelectorAll(
-        ".nav-links a"
-    );
-
-
-navItems.forEach(
-    link => {
+    navItems.forEach(link => {
 
         const href =
-            link.getAttribute(
-                "href"
-            );
-
+            link.getAttribute("href");
 
         if (
             href === currentPath ||
@@ -1362,150 +1028,102 @@ navItems.forEach(
                 href === "index.html"
             )
         ) {
-
-            link.classList.add(
-                "active"
-            );
-
+            link.classList.add("active");
         }
-
-    }
-);
-```
-
+    });
 }
 
+
 /* ============================================
-NOTIFICATION
+   NOTIFICATION
 ============================================ */
 
 function setupNotification() {
 
-```
-const banner =
-    document.getElementById(
-        "notif-banner"
-    );
+    const banner =
+        document.getElementById(
+            "notif-banner"
+        );
 
+    const badge =
+        document.querySelector(
+            ".notification-badge"
+        );
 
-const badge =
-    document.querySelector(
-        ".notification-badge"
-    );
+    const isStockPage =
+        window.location.pathname.includes(
+            "new-stock.html"
+        );
 
+    if (
+        banner &&
+        isStockPage
+    ) {
+        banner.classList.add("active");
+    }
 
-const isStockPage =
-    window.location.pathname.includes(
-        "new-stock.html"
-    );
-
-
-if (
-    banner &&
-    isStockPage
-) {
-
-    banner.classList.add(
-        "active"
-    );
-
+    if (badge) {
+        badge.style.display = "block";
+    }
 }
 
-
-if (badge) {
-
-    badge.style.display =
-        "block";
-
-}
-```
-
-}
 
 /* ============================================
-INITIALIZE WEBSITE
+   INITIALIZE WEBSITE
 ============================================ */
 
 document.addEventListener(
-"DOMContentLoaded",
-async function() {
+    "DOMContentLoaded",
+    async function() {
 
-```
-    console.log(
-        "🚀 Bablu Garments website started"
-    );
+        console.log(
+            "🚀 Bablu Garments website started"
+        );
 
+        setupMobileMenu();
+        setupActiveNav();
+        setupNotification();
 
-    setupMobileMenu();
+        renderShopGallery();
 
-    setupActiveNav();
+        await Promise.all([
+            renderNewStock(),
+            renderHomePreview(),
+            renderHomeReviews()
+        ]);
 
-    setupNotification();
-
-
-    /*
-     * Render shop gallery only
-     * when shop-gallery-grid exists.
-     */
-
-    renderShopGallery();
-
-
-    /*
-     * Load stock and reviews.
-     */
-
-    await Promise.all([
-
-        renderNewStock(),
-
-        renderHomePreview(),
-
-        renderHomeReviews()
-
-    ]);
-
-
-    console.log(
-        "✅ Website initialization completed"
-    );
-
-}
-```
-
+        console.log(
+            "✅ Website initialization completed"
+        );
+    }
 );
 
+
 /* ============================================
-GLOBAL REFRESH FUNCTIONS
+   GLOBAL REFRESH FUNCTIONS
 ============================================ */
 
 window.getNewStock =
-getNewStock;
+    getNewStock;
+
 
 window.refreshStock =
-async function() {
+    async function() {
 
-```
-    await Promise.all([
+        await Promise.all([
+            renderNewStock(),
+            renderHomePreview()
+        ]);
+    };
 
-        renderNewStock(),
-
-        renderHomePreview()
-
-    ]);
-
-};
-```
 
 window.refreshReviews =
-async function() {
+    async function() {
 
-```
-    await renderHomeReviews();
+        await renderHomeReviews();
+    };
 
-};
-```
 
 console.log(
-"✅ script.js loaded successfully"
+    "✅ script.js loaded successfully"
 );
