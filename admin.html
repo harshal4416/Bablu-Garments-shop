@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+
         .admin-page {
             min-height: 100vh;
             background: #f7f3ee;
@@ -58,19 +61,25 @@
         .stock-form-card,
         .stock-list-card,
         .gallery-form-card,
-        .gallery-list-card {
+        .gallery-list-card,
+        .reviews-list-card {
+
             background: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             margin-bottom: 25px;
+
         }
 
         .stock-form-card h2,
         .stock-list-card h2,
         .gallery-form-card h2,
-        .gallery-list-card h2 {
+        .gallery-list-card h2,
+        .reviews-list-card h2 {
+
             margin-top: 0;
+
         }
 
         .form-group {
@@ -86,12 +95,14 @@
         .form-group input,
         .form-group select,
         .form-group textarea {
+
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 15px;
             box-sizing: border-box;
+
         }
 
         .form-group textarea {
@@ -105,155 +116,181 @@
         }
 
         .image-preview img {
+
             width: 150px;
             height: 150px;
             object-fit: cover;
             border-radius: 10px;
             border: 1px solid #ddd;
+
         }
 
         .publish-btn {
+
             background: #8b1e1e;
             color: white;
             width: 100%;
             margin-top: 5px;
+
         }
 
         .publish-btn:disabled {
+
             opacity: 0.6;
             cursor: not-allowed;
+
         }
 
         #stockMessage,
-        #galleryMessage {
+        #galleryMessage,
+        #reviewMessage {
+
             margin-top: 15px;
             text-align: center;
             font-weight: 600;
+
         }
 
-        .stock-list {
+        .stock-list,
+        .gallery-list,
+        .reviews-list {
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
             gap: 20px;
+
         }
 
-        .stock-item {
+        .stock-item,
+        .gallery-item,
+        .review-item {
+
             border: 1px solid #eee;
             border-radius: 12px;
             overflow: hidden;
             background: #fff;
+
         }
 
-        .stock-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .stock-item-info {
-            padding: 15px;
-        }
-
-        .stock-item-info h3 {
-            margin: 0 0 7px;
-        }
-
-        .stock-category {
-            font-size: 13px;
-            color: #8b1e1e;
-            font-weight: 600;
-        }
-
-        .stock-description {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .delete-btn {
-            background: #b91c1c;
-            color: white;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        /* =========================
-           GALLERY
-        ========================= */
-
-        .gallery-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            border: 1px solid #eee;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-        }
-
+        .stock-item img,
         .gallery-item img {
+
             width: 100%;
             height: 220px;
             object-fit: cover;
             display: block;
+
         }
 
-        .gallery-item-info {
+        .stock-item-info,
+        .gallery-item-info,
+        .review-item-info {
+
             padding: 15px;
+
         }
 
+        .stock-item-info h3,
         .gallery-item-info h3 {
-            margin: 0;
-            font-size: 17px;
-            line-height: 1.5;
+
+            margin: 0 0 7px;
+
         }
 
-        .gallery-delete-btn {
+        .stock-category {
+
+            font-size: 13px;
+            color: #8b1e1e;
+            font-weight: 600;
+
+        }
+
+        .stock-description {
+
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+
+        }
+
+        .delete-btn {
+
             background: #b91c1c;
             color: white;
             width: 100%;
             margin-top: 10px;
+
+        }
+
+        .approve-btn {
+
+            background: #15803d;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+
+        }
+
+        .approve-btn:hover {
+            background: #166534;
+        }
+
+        .delete-btn:hover {
+            background: #991b1b;
         }
 
         .empty-message {
+
             color: #777;
             text-align: center;
             padding: 20px;
+            grid-column: 1 / -1;
+
         }
 
         #loginSection {
+
             max-width: 500px;
             margin: 80px auto;
+
         }
 
         .login-card {
+
             background: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
         }
 
         .login-card input {
+
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 8px;
+
         }
 
         .login-btn {
+
             width: 100%;
             background: #8b1e1e;
             color: white;
+
         }
 
         #loginMessage {
+
             text-align: center;
             margin-top: 15px;
+
         }
 
         #dashboard {
@@ -261,48 +298,181 @@
         }
 
         .section-note {
+
             background: #fff8e7;
             border-left: 4px solid #c89b3c;
             padding: 12px 15px;
             margin-bottom: 20px;
             border-radius: 5px;
             color: #555;
+
+        }
+
+        /* REVIEW */
+
+        .review-item {
+
+            padding: 0;
+            overflow: hidden;
+
+        }
+
+        .review-item-info {
+
+            padding: 20px;
+
+        }
+
+        .review-header {
+
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+
+        }
+
+        .review-name {
+
+            font-size: 18px;
+            font-weight: 700;
+            color: #7f1d1d;
+
+        }
+
+        .review-email {
+
+            font-size: 13px;
+            color: #777;
+            margin-top: 3px;
+
+        }
+
+        .review-status {
+
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+
+        }
+
+        .status-pending {
+
+            background: #fff7ed;
+            color: #c2410c;
+
+        }
+
+        .status-approved {
+
+            background: #f0fdf4;
+            color: #15803d;
+
+        }
+
+        .review-stars {
+
+            color: #d4a017;
+            margin: 8px 0;
+
+        }
+
+        .review-feedback {
+
+            color: #444;
+            line-height: 1.6;
+            margin: 10px 0;
+
+        }
+
+        .review-date {
+
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+
+        }
+
+        .review-actions {
+
+            display: flex;
+            gap: 10px;
+
+        }
+
+        .review-actions button {
+
+            flex: 1;
+
         }
 
         @media (max-width: 600px) {
 
             .admin-header {
+
                 flex-direction: column;
                 align-items: flex-start;
+
             }
 
             .logout-btn {
+
                 width: 100%;
+
             }
 
             .stock-form-card,
             .stock-list-card,
             .gallery-form-card,
-            .gallery-list-card {
+            .gallery-list-card,
+            .reviews-list-card {
+
                 padding: 20px;
+
             }
+
+            .review-header {
+
+                flex-direction: column;
+
+            }
+
+            .review-actions {
+
+                flex-direction: column;
+
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================================
-         ADMIN LOGIN
-    ========================================== -->
 
-    <section id="loginSection" class="admin-page">
+    <!-- ==========================================
+         LOGIN
+    =========================================== -->
+
+    <section
+        id="loginSection"
+        class="admin-page"
+    >
 
         <div class="login-card">
 
             <h1>Admin Login</h1>
 
-            <p>Bablu Garments Admin Panel</p>
+            <p>
+                Bablu Garments Admin Panel
+            </p>
+
 
             <form id="loginForm">
 
@@ -329,6 +499,7 @@
 
             </form>
 
+
             <div id="loginMessage"></div>
 
         </div>
@@ -336,18 +507,20 @@
     </section>
 
 
-    <!-- =========================================
-         DASHBOARD
-    ========================================== -->
 
-    <section id="dashboard" class="admin-page">
+    <!-- ==========================================
+         DASHBOARD
+    =========================================== -->
+
+    <section
+        id="dashboard"
+        class="admin-page"
+    >
 
         <div class="admin-wrapper">
 
 
-            <!-- =================================
-                 HEADER
-            ================================== -->
+            <!-- HEADER -->
 
             <div class="admin-header">
 
@@ -358,10 +531,11 @@
                     </h1>
 
                     <p>
-                        Manage your website content
+                        Manage Stock, Gallery & Customer Reviews
                     </p>
 
                 </div>
+
 
                 <button
                     id="logoutBtn"
@@ -373,15 +547,17 @@
             </div>
 
 
-            <!-- =================================
-                 ADD NEW STOCK
-            ================================== -->
+
+            <!-- ======================================
+                 STOCK
+            ======================================= -->
 
             <div class="stock-form-card">
 
                 <h2>
                     📦 Add New Stock
                 </h2>
+
 
                 <form id="stockForm">
 
@@ -470,6 +646,7 @@
                             required
                         >
 
+
                         <div
                             class="image-preview"
                             id="imagePreview"
@@ -478,7 +655,7 @@
                             <img
                                 id="previewImage"
                                 src=""
-                                alt="Preview"
+                                alt="Stock Preview"
                             >
 
                         </div>
@@ -488,22 +665,22 @@
 
                     <button
                         type="submit"
-                        class="admin-btn publish-btn"
                         id="publishBtn"
+                        class="admin-btn publish-btn"
                     >
                         Publish Stock
                     </button>
 
                 </form>
 
+
                 <div id="stockMessage"></div>
 
             </div>
 
 
-            <!-- =================================
-                 CURRENT STOCK
-            ================================== -->
+
+            <!-- CURRENT STOCK -->
 
             <div class="stock-list-card">
 
@@ -511,9 +688,10 @@
                     📋 Current Stock
                 </h2>
 
+
                 <div
-                    class="stock-list"
                     id="stockList"
+                    class="stock-list"
                 >
 
                     <div class="empty-message">
@@ -525,9 +703,10 @@
             </div>
 
 
-            <!-- =================================
-                 ADD GALLERY IMAGE
-            ================================== -->
+
+            <!-- ======================================
+                 GALLERY
+            ======================================= -->
 
             <div class="gallery-form-card">
 
@@ -535,16 +714,23 @@
                     🖼️ Add Gallery Image
                 </h2>
 
+
                 <div class="section-note">
-                    Gallery मध्ये दुकानाचे फोटो, कपड्यांचे फोटो किंवा
-                    collection चे फोटो इथून upload करा.
-                    Website code बदलण्याची गरज नाही.
+
+                    Gallery मध्ये दुकानाचे फोटो,
+                    shop interior, collection photos इथून upload करा.
+
+                    <br>
+
+                    <strong>
+                        Website code बदलण्याची गरज नाही.
+                    </strong>
+
                 </div>
+
 
                 <form id="galleryForm">
 
-
-                    <!-- TITLE -->
 
                     <div class="form-group">
 
@@ -555,14 +741,12 @@
                         <input
                             type="text"
                             id="galleryTitle"
-                            placeholder="उदा. आमच्या दुकानाची आतील झलक"
+                            placeholder="उदा. दुकानाची आतील झलक"
                             required
                         >
 
                     </div>
 
-
-                    <!-- IMAGE -->
 
                     <div class="form-group">
 
@@ -576,6 +760,7 @@
                             accept="image/*"
                             required
                         >
+
 
                         <div
                             class="image-preview"
@@ -595,36 +780,81 @@
 
                     <button
                         type="submit"
-                        class="admin-btn publish-btn"
                         id="galleryPublishBtn"
+                        class="admin-btn publish-btn"
                     >
                         Upload Gallery Image
                     </button>
 
                 </form>
 
+
                 <div id="galleryMessage"></div>
 
             </div>
 
 
-            <!-- =================================
-                 CURRENT GALLERY
-            ================================== -->
+
+            <!-- CURRENT GALLERY -->
 
             <div class="gallery-list-card">
 
                 <h2>
-                    🖼️ Current Gallery
+                    📸 Current Gallery
                 </h2>
 
+
                 <div
-                    class="gallery-list"
                     id="galleryList"
+                    class="gallery-list"
                 >
 
                     <div class="empty-message">
                         Loading gallery...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ======================================
+                 CUSTOMER REVIEWS
+            ======================================= -->
+
+            <div class="reviews-list-card">
+
+                <h2>
+                    ⭐ Customer Reviews
+                </h2>
+
+
+                <div class="section-note">
+
+                    Customer द्वारा भेजे गए reviews पहले
+                    <strong>Pending</strong> रहेंगे.
+
+                    <br>
+
+                    Review approve करने के बाद ही
+                    website पर दिखाई देगा.
+
+                </div>
+
+
+                <div
+                    id="reviewMessage"
+                ></div>
+
+
+                <div
+                    id="reviewsList"
+                    class="reviews-list"
+                >
+
+                    <div class="empty-message">
+                        Loading reviews...
                     </div>
 
                 </div>
@@ -637,14 +867,17 @@
     </section>
 
 
-    <!-- =========================================
-         ADMIN JAVASCRIPT
-    ========================================== -->
+
+    <!-- ==========================================
+         ADMIN JS
+    =========================================== -->
 
     <script
         type="module"
         src="js/admin.js"
     ></script>
 
+
 </body>
+
 </html>
